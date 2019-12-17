@@ -1,5 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_graph">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/programFragment">
 
+    <fragment
+        android:id="@+id/programFragment"
+        android:name="com.example.blapp.ProgramFragment"
+        android:label="fragment_program"
+        tools:layout="@layout/fragment_program" >
+        <action
+            android:id="@+id/action_programFragment_to_setStepFragment"
+            app:destination="@id/setStepFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/setStepFragment"
+        android:name="com.example.blapp.SetStepFragment"
+        android:label="fragment_set_step"
+        tools:layout="@layout/fragment_set_step" >
+        <action
+            android:id="@+id/action_setStepFragment_to_programFragment"
+            app:destination="@id/programFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            />
+    </fragment>
 </navigation>

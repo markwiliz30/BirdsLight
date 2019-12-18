@@ -1,14 +1,203 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TestFragment">
+    android:background="#14BED1"
+    tools:context=".TestFragment"
+    android:orientation="vertical">
+
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/lblProgram"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select program"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="100dp"
+        android:textStyle="bold"
+        android:textSize="30dp"
+        android:textColor="#39405A" />
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="75dp"
+        android:padding="10dp"
+        android:layout_marginTop="30dp"
+        android:gravity="center_horizontal">
+        <ToggleButton
+            android:id="@+id/tglPrgm1"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:text="prgm1"
+            android:textOff="1"
+            android:textOn="1"
+            android:layout_marginHorizontal="5dp"
+            android:background="@drawable/buton_model"
+            android:textColor="#14BED1"
+            android:textSize="15dp"/>
 
-</FrameLayout>
+        <ToggleButton
+            android:id="@+id/tglPrgm2"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+
+            android:checked="false"
+            android:text="prgm2"
+            android:textOff="2"
+            android:textOn="2"
+            android:layout_marginHorizontal="5dp"
+            android:background="@drawable/buton_model"
+            android:textColor="#14BED1"
+            android:textSize="15dp"/>
+
+        <ToggleButton
+            android:id="@+id/tglPrgm3"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+
+            android:checked="false"
+            android:text="prgm3"
+            android:textOff="3"
+            android:textOn="3"
+            android:layout_marginHorizontal="5dp"
+            android:background="@drawable/buton_model"
+            android:textColor="#14BED1"
+            android:textSize="15dp"/>
+
+        <ToggleButton
+            android:id="@+id/tglPrgm4"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+
+            android:checked="false"
+            android:text="prgm4"
+            android:textOff="4"
+            android:textOn="4"
+            android:layout_marginHorizontal="5dp"
+            android:background="@drawable/buton_model"
+            android:textColor="#14BED1"
+            android:textSize="15dp"/>
+
+        <ToggleButton
+            android:id="@+id/tglPrgm5"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+
+            android:checked="false"
+            android:text="prgm5"
+            android:textOff="5"
+            android:textOn="5"
+            android:layout_marginHorizontal="5dp"
+            android:background="@drawable/buton_model"
+            android:textColor="#14BED1"
+            android:textSize="15dp"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:padding="10dp"
+        android:gravity="center_horizontal">
+        <ToggleButton
+            android:id="@+id/tglPrgm6"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:text="prgm6"
+            android:textOff="6"
+            android:textOn="6"
+            android:layout_marginHorizontal="5dp"
+            android:background="@drawable/buton_model"
+            android:textColor="#14BED1"
+            android:textSize="15dp"/>
+
+        <ToggleButton
+            android:id="@+id/tglPrgm7"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+
+            android:checked="false"
+            android:text="prgm7"
+            android:textOff="7"
+            android:textOn="7"
+            android:layout_marginHorizontal="5dp"
+            android:background="@drawable/buton_model"
+            android:textColor="#14BED1"
+            android:textSize="15dp"/>
+
+        <ToggleButton
+            android:id="@+id/tglPrgm8"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+
+            android:checked="false"
+            android:text="prgm8"
+            android:textOff="8"
+            android:textOn="8"
+            android:layout_marginHorizontal="5dp"
+            android:background="@drawable/buton_model"
+            android:textColor="#14BED1"
+            android:textSize="15dp"/>
+
+        <ToggleButton
+            android:id="@+id/tglPrgm9"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+
+            android:checked="false"
+            android:text="prgm9"
+            android:textOff="9"
+            android:textOn="9"
+            android:layout_marginHorizontal="5dp"
+            android:background="@drawable/buton_model"
+            android:textColor="#14BED1"
+            android:textSize="15dp"/>
+
+        <ToggleButton
+            android:id="@+id/tglPrgm10"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+
+            android:checked="false"
+            android:text="prgm10"
+            android:textOff="10"
+            android:textOn="10"
+            android:layout_marginHorizontal="5dp"
+            android:background="@drawable/buton_model"
+            android:textColor="#14BED1"
+            android:textSize="15dp"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/lblReset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Set to default position"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:textStyle="bold"
+        android:textSize="30dp"
+        android:textColor="#39405A" />
+
+    <Button
+        android:id="@+id/btnReset"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginHorizontal="50dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/buton_model"
+        android:text="Reset"
+        android:textColor="#14BED1"
+        android:textSize="20dp"
+
+        />
+
+
+
+</LinearLayout>

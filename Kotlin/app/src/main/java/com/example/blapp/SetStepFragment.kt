@@ -30,7 +30,7 @@ class SetStepFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
         btn_pgm_step.setOnClickListener{
-            navController.navigate(R.id.action_setStepFragment_to_programFragment)
+
         }
     }
 }

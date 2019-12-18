@@ -34,7 +34,7 @@
             android:textOff="1"
             android:textOn="1"
             android:layout_marginHorizontal="5dp"
-            android:background="@drawable/buton_model"
+            android:background="@drawable/button_model"
             android:textColor="#14BED1"
             android:textSize="15dp"/>
 
@@ -48,7 +48,7 @@
             android:textOff="2"
             android:textOn="2"
             android:layout_marginHorizontal="5dp"
-            android:background="@drawable/buton_model"
+            android:background="@drawable/button_model"
             android:textColor="#14BED1"
             android:textSize="15dp"/>
 
@@ -62,7 +62,7 @@
             android:textOff="3"
             android:textOn="3"
             android:layout_marginHorizontal="5dp"
-            android:background="@drawable/buton_model"
+            android:background="@drawable/button_model"
             android:textColor="#14BED1"
             android:textSize="15dp"/>
 
@@ -76,7 +76,7 @@
             android:textOff="4"
             android:textOn="4"
             android:layout_marginHorizontal="5dp"
-            android:background="@drawable/buton_model"
+            android:background="@drawable/button_model"
             android:textColor="#14BED1"
             android:textSize="15dp"/>
 
@@ -90,7 +90,7 @@
             android:textOff="5"
             android:textOn="5"
             android:layout_marginHorizontal="5dp"
-            android:background="@drawable/buton_model"
+            android:background="@drawable/button_model"
             android:textColor="#14BED1"
             android:textSize="15dp"/>
 
@@ -111,7 +111,7 @@
             android:textOff="6"
             android:textOn="6"
             android:layout_marginHorizontal="5dp"
-            android:background="@drawable/buton_model"
+            android:background="@drawable/button_model"
             android:textColor="#14BED1"
             android:textSize="15dp"/>
 
@@ -125,7 +125,7 @@
             android:textOff="7"
             android:textOn="7"
             android:layout_marginHorizontal="5dp"
-            android:background="@drawable/buton_model"
+            android:background="@drawable/button_model"
             android:textColor="#14BED1"
             android:textSize="15dp"/>
 
@@ -139,7 +139,7 @@
             android:textOff="8"
             android:textOn="8"
             android:layout_marginHorizontal="5dp"
-            android:background="@drawable/buton_model"
+            android:background="@drawable/button_model"
             android:textColor="#14BED1"
             android:textSize="15dp"/>
 
@@ -153,7 +153,7 @@
             android:textOff="9"
             android:textOn="9"
             android:layout_marginHorizontal="5dp"
-            android:background="@drawable/buton_model"
+            android:background="@drawable/button_model"
             android:textColor="#14BED1"
             android:textSize="15dp"/>
 
@@ -167,11 +167,21 @@
             android:textOff="10"
             android:textOn="10"
             android:layout_marginHorizontal="5dp"
-            android:background="@drawable/buton_model"
+            android:background="@drawable/button_model"
             android:textColor="#14BED1"
             android:textSize="15dp"/>
 
     </LinearLayout>
+    <TextView
+        android:id="@+id/lblActive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Active Program :"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:textStyle="bold"
+        android:textSize="15dp"
+        android:textColor="#39405A" />
 
     <TextView
         android:id="@+id/lblReset"
@@ -191,7 +201,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginHorizontal="50dp"
         android:layout_marginTop="30dp"
-        android:background="@drawable/buton_model"
+        android:background="@drawable/button_model"
         android:text="Reset"
         android:textColor="#14BED1"
         android:textSize="20dp"

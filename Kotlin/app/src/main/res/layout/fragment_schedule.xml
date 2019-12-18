@@ -1,14 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ScheduleFragment">
+    tools:context=".ScheduleFragment"
+    android:background="#14BED1"
+    android:orientation="vertical">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="60dp"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        >
 
-</FrameLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select Setup: "
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:textColor="#39405A"/>
+
+        <Spinner
+            android:id="@+id/drpSetup"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+             />
+
+        <Button
+            android:id="@+id/btnAddStep"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:background="@drawable/button_model"
+            android:text="Add Setup"
+            android:layout_marginLeft="10dp"
+            android:textColor="#14BED1"/>
+
+    </LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Date Range"
+        android:textColor="#14BED1" />
+
+
+</LinearLayout>

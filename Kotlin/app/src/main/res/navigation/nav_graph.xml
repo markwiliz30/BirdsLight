@@ -21,5 +21,9 @@
         android:id="@+id/testFragment"
         android:name="com.example.blapp.TestFragment"
         android:label="fragment_test"
-        tools:layout="@layout/fragment_test" />
+        tools:layout="@layout/fragment_test" >
+        <action
+            android:id="@+id/action_testFragment_to_landingFragment"
+            app:destination="@id/landingFragment" />
+    </fragment>
 </navigation>

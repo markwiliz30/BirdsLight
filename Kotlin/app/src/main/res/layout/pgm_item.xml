@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:weightSum="2"
+        android:id="@+id/pgm_container">
+
+        <Switch
+            android:id="@+id/swt_pgm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="7dp"/>
+
+        <TextView
+            android:id="@+id/txt_pgm_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Program - "
+            android:textAlignment="textEnd"/>
+
+        <TextView
+            android:id="@+id/txt_pgm_Num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="00" />
+
+        <ImageView
+            android:id="@+id/img_pgm_del"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/ic_home_black_24dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="5dp"/>
+
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

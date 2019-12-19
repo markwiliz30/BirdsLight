@@ -26,11 +26,11 @@
         android:layout_marginTop="30dp"
         android:gravity="center_horizontal">
         <ToggleButton
-            android:id="@+id/tglPrgm1"
+            android:id="@+id/tglPgm1"
             android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:checked="false"
-            android:text="prgm1"
+            android:text="pgm1"
             android:textOff="1"
             android:textOn="1"
             android:layout_marginHorizontal="5dp"
@@ -39,12 +39,12 @@
             android:textSize="15dp"/>
 
         <ToggleButton
-            android:id="@+id/tglPrgm2"
+            android:id="@+id/tglPgm2"
             android:layout_width="60dp"
             android:layout_height="wrap_content"
 
             android:checked="false"
-            android:text="prgm2"
+            android:text="pgm2"
             android:textOff="2"
             android:textOn="2"
             android:layout_marginHorizontal="5dp"
@@ -53,12 +53,12 @@
             android:textSize="15dp"/>
 
         <ToggleButton
-            android:id="@+id/tglPrgm3"
+            android:id="@+id/tglPgm3"
             android:layout_width="60dp"
             android:layout_height="wrap_content"
 
             android:checked="false"
-            android:text="prgm3"
+            android:text="pgm3"
             android:textOff="3"
             android:textOn="3"
             android:layout_marginHorizontal="5dp"
@@ -67,12 +67,12 @@
             android:textSize="15dp"/>
 
         <ToggleButton
-            android:id="@+id/tglPrgm4"
+            android:id="@+id/tglPgm4"
             android:layout_width="60dp"
             android:layout_height="wrap_content"
 
             android:checked="false"
-            android:text="prgm4"
+            android:text="pgm4"
             android:textOff="4"
             android:textOn="4"
             android:layout_marginHorizontal="5dp"
@@ -81,12 +81,12 @@
             android:textSize="15dp"/>
 
         <ToggleButton
-            android:id="@+id/tglPrgm5"
+            android:id="@+id/tglPgm5"
             android:layout_width="60dp"
             android:layout_height="wrap_content"
 
             android:checked="false"
-            android:text="prgm5"
+            android:text="pgm5"
             android:textOff="5"
             android:textOn="5"
             android:layout_marginHorizontal="5dp"
@@ -103,11 +103,11 @@
         android:padding="10dp"
         android:gravity="center_horizontal">
         <ToggleButton
-            android:id="@+id/tglPrgm6"
+            android:id="@+id/tglPgm6"
             android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:checked="false"
-            android:text="prgm6"
+            android:text="pgm6"
             android:textOff="6"
             android:textOn="6"
             android:layout_marginHorizontal="5dp"
@@ -116,12 +116,12 @@
             android:textSize="15dp"/>
 
         <ToggleButton
-            android:id="@+id/tglPrgm7"
+            android:id="@+id/tglPgm7"
             android:layout_width="60dp"
             android:layout_height="wrap_content"
 
             android:checked="false"
-            android:text="prgm7"
+            android:text="pgm7"
             android:textOff="7"
             android:textOn="7"
             android:layout_marginHorizontal="5dp"
@@ -130,12 +130,12 @@
             android:textSize="15dp"/>
 
         <ToggleButton
-            android:id="@+id/tglPrgm8"
+            android:id="@+id/tglPgm8"
             android:layout_width="60dp"
             android:layout_height="wrap_content"
 
             android:checked="false"
-            android:text="prgm8"
+            android:text="pgm8"
             android:textOff="8"
             android:textOn="8"
             android:layout_marginHorizontal="5dp"
@@ -144,12 +144,12 @@
             android:textSize="15dp"/>
 
         <ToggleButton
-            android:id="@+id/tglPrgm9"
+            android:id="@+id/tglPgm9"
             android:layout_width="60dp"
             android:layout_height="wrap_content"
 
             android:checked="false"
-            android:text="prgm9"
+            android:text="pgm9"
             android:textOff="9"
             android:textOn="9"
             android:layout_marginHorizontal="5dp"
@@ -158,12 +158,12 @@
             android:textSize="15dp"/>
 
         <ToggleButton
-            android:id="@+id/tglPrgm10"
+            android:id="@+id/tglPgm10"
             android:layout_width="60dp"
             android:layout_height="wrap_content"
 
             android:checked="false"
-            android:text="prgm10"
+            android:text="pgm10"
             android:textOff="10"
             android:textOn="10"
             android:layout_marginHorizontal="5dp"

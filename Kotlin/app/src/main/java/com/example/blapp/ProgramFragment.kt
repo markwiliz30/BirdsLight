@@ -25,8 +25,8 @@ class ProgramFragment : Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
-        btn_step_pgm.setOnClickListener{
-            //navController.navigate(R.id.action_landingFragment_to_testFragment)
-        }
+//        btn_step_pgm.setOnClickListener{
+//            navController.navigate(R.id.action_landingFragment_to_testFragment)
+//        }
     }
 }

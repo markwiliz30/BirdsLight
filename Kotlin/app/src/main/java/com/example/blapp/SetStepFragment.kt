@@ -29,8 +29,8 @@ class SetStepFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
-        btn_pgm_step.setOnClickListener{
-
-        }
+//        btn_pgm_step.setOnClickListener{
+//
+//        }
     }
 }

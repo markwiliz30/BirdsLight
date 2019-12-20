@@ -25,6 +25,9 @@ class ScheduleFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
+        btnManageSequence.setOnClickListener{
+            navController.navigate(R.id.action_scheduleFragment_to_sequence)
+        }
     }
 
 }

@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.AttributeSet
 import android.view.ContextMenu
 import android.view.View
+import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
@@ -21,8 +22,8 @@ class Landing : AppCompatActivity() {
         private const val ID_PROGRAMFRAGMENT = 3
         private const val ID_SCHEDULEFRAGMENT = 4
         private const val ID_SETTINGSFRAGMENT = 5
-
     }
+
         var currentSelectedId: Int = 1
     lateinit var navController: NavController
 

@@ -32,6 +32,7 @@ class Landing : AppCompatActivity() {
         private const val ID_PROGRAMFRAGMENT = 3
         private const val ID_SCHEDULEFRAGMENT = 4
         private const val ID_SETTINGSFRAGMENT = 5
+        private var aax = false
     }
 
     lateinit var navController: NavController
@@ -70,10 +71,9 @@ class Landing : AppCompatActivity() {
 
         //bottomNavigation.setCount(ID_NOTIFICATION, "69")
 
-
         bottomNavigation.setOnClickMenuListener {
             when (it.id) {
-                ID_HOME -> if (CurrentID.getID() == 2) {
+                 ID_HOME -> if (CurrentID.getID() == 2) {
                     navController.navigate(R.id.action_testFragment_to_landingFragment)
                     CurrentID.UpdateID(num = it.id)
                 } else if (CurrentID.getID() == 3) {
@@ -86,9 +86,6 @@ class Landing : AppCompatActivity() {
                     navController.navigate(R.id.action_settings_to_landingFragment)
                     CurrentID.UpdateID(num = it.id)
                 } else if (CurrentID.getID() == 6) {
-                    navController.navigate(R.id.action_setStepFragment_to_landingFragment)
-                    CurrentID.UpdateID(num = it.id)
-                    CurrentID.Updatebool(x = false)
                     ShowSaveAlert(clicked = it.id , current = CurrentID.getID())
                 } else if (CurrentID.getID() == 7) {
                     navController.navigate(R.id.action_sequence_to_landingFragment)
@@ -236,7 +233,12 @@ class Landing : AppCompatActivity() {
         mAlertDialog.setTitle("Title!") //set alertdialog title
         mAlertDialog.setMessage("Your message here") //set alertdialog message
         mAlertDialog.setPositiveButton("Yes") { dialog, id ->
-            //perform some tasks here
+            if(clicked == 1 && current == 6){
+                navController.navigate(R.id.action_setStepFragment_to_landingFragment)
+                CurrentID.UpdateID(num = clicked)
+                CurrentID.Updatebool(x = false)
+            }
+
             Toast.makeText(this, "Yes", Toast.LENGTH_SHORT).show()
         }
         mAlertDialog.setNegativeButton("No") { dialog, id ->

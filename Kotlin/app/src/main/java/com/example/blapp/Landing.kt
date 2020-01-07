@@ -70,7 +70,7 @@ class Landing : AppCompatActivity() {
             )
         )
 
-        //bottomNavigation.setCount(ID_NOTIFICATION, "69")
+        //bottomNavigation.setCount(ID_NOTIFICATION, "69") hentai
         bottomNavigation.show(ID_HOME)
 
         bottomNavigation.setOnClickMenuListener {

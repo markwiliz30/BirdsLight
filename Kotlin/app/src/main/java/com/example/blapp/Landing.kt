@@ -14,6 +14,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 import kotlinx.android.synthetic.main.activity_landing.*
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation
+import com.etebarian.meowbottomnavigation.MeowBottomNavigationCell
 import com.CurrentId.extensions.CurrentID
 import android.content.Intent
 import androidx.core.app.ComponentActivity.ExtraData
@@ -71,7 +72,7 @@ class Landing : AppCompatActivity() {
 
         //bottomNavigation.setCount(ID_NOTIFICATION, "69")
         bottomNavigation.show(ID_HOME)
-        meowbottomnavigation
+        bottomNavigation
         bottomNavigation.setOnClickMenuListener {
             if(aax){
 

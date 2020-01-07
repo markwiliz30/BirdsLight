@@ -32,7 +32,7 @@ class Landing : AppCompatActivity() {
         private const val ID_PROGRAMFRAGMENT = 3
         private const val ID_SCHEDULEFRAGMENT = 4
         private const val ID_SETTINGSFRAGMENT = 5
-        private var aax = false
+        private var aax = true
     }
 
     lateinit var navController: NavController
@@ -70,8 +70,12 @@ class Landing : AppCompatActivity() {
         )
 
         //bottomNavigation.setCount(ID_NOTIFICATION, "69")
-
+        bottomNavigation.show(ID_HOME)
+        meowbottomnavigation
         bottomNavigation.setOnClickMenuListener {
+            if(aax){
+
+
             when (it.id) {
                  ID_HOME -> if (CurrentID.getID() == 2) {
                     navController.navigate(R.id.action_testFragment_to_landingFragment)
@@ -193,7 +197,7 @@ class Landing : AppCompatActivity() {
                 else -> navController.navigate(R.id.action_landingFragment_to_testFragment)
             }
 //            Toast.makeText(this, "$name is clicked", Toast.LENGTH_SHORT).show()
-        }
+        } }
     }
 
     private var doubleBackToExitPressedOnce = false

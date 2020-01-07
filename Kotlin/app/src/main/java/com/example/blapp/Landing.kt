@@ -39,7 +39,8 @@ class Landing : AppCompatActivity() {
         bottomNavigation.add(MeowBottomNavigation.Model(ID_SCHEDULEFRAGMENT, R.drawable.ic_home_black_24dp))
         bottomNavigation.add(MeowBottomNavigation.Model(ID_SETTINGSFRAGMENT, R.drawable.ic_home_black_24dp))
 
-        //bottomNavigation.setCount(ID_NOTIFICATION, "69")
+        //bottomNavigation.setCount(ID_NOTIFICATION, "69") hentai
+        bottomNavigation.show(ID_HOME)
 
         bottomNavigation.setOnClickMenuListener {
             when (it.id) {

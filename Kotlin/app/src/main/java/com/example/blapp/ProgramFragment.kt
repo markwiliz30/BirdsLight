@@ -12,6 +12,7 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.CurrentId.extensions.CurrentID
 import com.example.blapp.adapter.PgmAdapter
 import com.example.blapp.helper.MyButton
 import com.example.blapp.helper.MySwipeHelper
@@ -99,6 +100,8 @@ class ProgramFragment : Fragment(){
         navController = Navigation.findNavController(view)
         btnNewProgram.setOnClickListener{
             navController.navigate(R.id.action_programFragment_to_setStepFragment)
+            CurrentID.UpdateID(num = 6)
+            CurrentID.Updatebool(x = true)
         }
     }
 }

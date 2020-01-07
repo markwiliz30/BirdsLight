@@ -84,8 +84,8 @@ tools:layout="@layout/fragment_program" >
 <action
     android:id="@+id/action_programFragment_to_setStepFragment"
     app:destination="@id/setStepFragment"
-    app:exitAnim="@anim/slide_out_left"
-    app:enterAnim="@anim/slide_in_right"/>
+    app:exitAnim="@anim/slide_up"
+    app:enterAnim="@anim/slide_down"/>
 </fragment>
 <fragment
 android:id="@+id/scheduleFragment"
@@ -115,8 +115,8 @@ tools:layout="@layout/fragment_schedule" >
 <action
     android:id="@+id/action_scheduleFragment_to_sequence"
     app:destination="@id/sequence"
-    app:exitAnim="@anim/slide_out_left"
-    app:enterAnim="@anim/slide_in_right"/>
+    app:exitAnim="@anim/slide_up"
+    app:enterAnim="@anim/slide_down"/>
 </fragment>
 <fragment
 android:id="@+id/settings"
@@ -152,28 +152,28 @@ tools:layout="@layout/fragment_set_step" >
 <action
     android:id="@+id/action_setStepFragment_to_programFragment"
     app:destination="@id/programFragment"
-    app:exitAnim="@anim/slide_out_right"
-    app:enterAnim="@anim/slide_in_left"/>
+    app:exitAnim="@anim/slide_up"
+    app:enterAnim="@anim/slide_down"/>
 <action
     android:id="@+id/action_setStepFragment_to_testFragment"
     app:destination="@id/testFragment"
-    app:exitAnim="@anim/slide_out_right"
-    app:enterAnim="@anim/slide_in_left"/>
+    app:exitAnim="@anim/slide_up"
+    app:enterAnim="@anim/slide_down"/>
 <action
     android:id="@+id/action_setStepFragment_to_landingFragment"
     app:destination="@id/landingFragment"
-    app:exitAnim="@anim/slide_out_right"
-    app:enterAnim="@anim/slide_in_left"/>
+    app:exitAnim="@anim/slide_up"
+    app:enterAnim="@anim/slide_down"/>
 <action
     android:id="@+id/action_setStepFragment_to_scheduleFragment"
     app:destination="@id/scheduleFragment"
-    app:exitAnim="@anim/slide_out_right"
-    app:enterAnim="@anim/slide_in_left"/>
+    app:exitAnim="@anim/slide_up"
+    app:enterAnim="@anim/slide_down"/>
 <action
     android:id="@+id/action_setStepFragment_to_settings"
     app:destination="@id/settings"
-    app:exitAnim="@anim/slide_out_right"
-    app:enterAnim="@anim/slide_in_left"/>
+    app:exitAnim="@anim/slide_up"
+    app:enterAnim="@anim/slide_down"/>
 <action
     android:id="@+id/action_setStepFragment_to_testFragment2"
     app:destination="@id/testFragment" />
@@ -186,35 +186,33 @@ tools:layout="@layout/fragment_sequence" >
 <action
     android:id="@+id/action_sequence_to_scheduleFragment"
     app:destination="@id/scheduleFragment"
-    app:popEnterAnim="@anim/slide_out_right"
-    app:popExitAnim="@anim/slide_in_left"
-    app:exitAnim="@anim/slide_out_right"
-    app:enterAnim="@anim/slide_in_left"/>
+    app:exitAnim="@anim/slide_up"
+    app:enterAnim="@anim/slide_down"/>
 <action
     android:id="@+id/action_sequence_to_programFragment"
     app:destination="@id/programFragment"
-    app:exitAnim="@anim/slide_out_right"
-    app:enterAnim="@anim/slide_in_left"/>
+    app:exitAnim="@anim/slide_up"
+    app:enterAnim="@anim/slide_down"/>
 <action
     android:id="@+id/action_sequence_to_testFragment"
     app:destination="@id/testFragment"
-    app:exitAnim="@anim/slide_out_right"
-    app:enterAnim="@anim/slide_in_left"/>
+    app:exitAnim="@anim/slide_up"
+    app:enterAnim="@anim/slide_down"/>
 <action
     android:id="@+id/action_sequence_to_landingFragment"
     app:destination="@id/landingFragment"
-    app:exitAnim="@anim/slide_out_right"
-    app:enterAnim="@anim/slide_in_left"/>
+    app:exitAnim="@anim/slide_up"
+    app:enterAnim="@anim/slide_down"/>
 <action
     android:id="@+id/action_sequence_to_settings"
     app:destination="@id/settings"
-    app:exitAnim="@anim/slide_out_right"
-    app:enterAnim="@anim/slide_in_left"/>
+    app:exitAnim="@anim/slide_up"
+    app:enterAnim="@anim/slide_down"/>
 <action
     android:id="@+id/action_sequence_to_dayPicker"
     app:destination="@id/dayPicker"
-    app:exitAnim="@anim/slide_out_left"
-    app:enterAnim="@anim/slide_in_right"/>
+    app:exitAnim="@anim/slide_up"
+    app:enterAnim="@anim/slide_down"/>
 </fragment>
 <fragment
 android:id="@+id/dayPicker"
@@ -224,32 +222,32 @@ tools:layout="@layout/fragment_day_picker" >
 <action
     android:id="@+id/action_dayPicker_to_sequence"
     app:destination="@id/sequence"
-    app:exitAnim="@anim/slide_out_right"
-    app:enterAnim="@anim/slide_in_left"/>
+    app:exitAnim="@anim/slide_up"
+    app:enterAnim="@anim/slide_down"/>
 <action
     android:id="@+id/action_dayPicker_to_scheduleFragment"
     app:destination="@id/scheduleFragment"
-    app:exitAnim="@anim/slide_out_right"
-    app:enterAnim="@anim/slide_in_left"/>
+    app:exitAnim="@anim/slide_up"
+    app:enterAnim="@anim/slide_down"/>
 <action
     android:id="@+id/action_dayPicker_to_programFragment"
     app:destination="@id/programFragment"
-    app:exitAnim="@anim/slide_out_right"
-    app:enterAnim="@anim/slide_in_left"/>
+    app:exitAnim="@anim/slide_up"
+    app:enterAnim="@anim/slide_down"/>
 <action
     android:id="@+id/action_dayPicker_to_testFragment"
     app:destination="@id/testFragment"
-    app:exitAnim="@anim/slide_out_right"
-    app:enterAnim="@anim/slide_in_left"/>
+    app:exitAnim="@anim/slide_up"
+    app:enterAnim="@anim/slide_down"/>
 <action
     android:id="@+id/action_dayPicker_to_settings"
     app:destination="@id/settings"
-    app:exitAnim="@anim/slide_out_right"
-    app:enterAnim="@anim/slide_in_left"/>
+    app:exitAnim="@anim/slide_up"
+    app:enterAnim="@anim/slide_down"/>
 <action
     android:id="@+id/action_dayPicker_to_landingFragment"
     app:destination="@id/landingFragment"
-    app:exitAnim="@anim/slide_out_right"
-    app:enterAnim="@anim/slide_in_left"/>
+    app:exitAnim="@anim/slide_up"
+    app:enterAnim="@anim/slide_down"/>
 </fragment>
 </navigation>

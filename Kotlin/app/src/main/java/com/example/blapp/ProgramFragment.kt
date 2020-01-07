@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import com.CurrentId.extensions.CurrentID
 import kotlinx.android.synthetic.main.fragment_program.*
 
 class ProgramFragment : Fragment(){
@@ -27,6 +28,8 @@ class ProgramFragment : Fragment(){
         navController = Navigation.findNavController(view)
         btnNewProgram.setOnClickListener{
             navController.navigate(R.id.action_programFragment_to_setStepFragment)
+            CurrentID.UpdateID(num = 6)
+            CurrentID.Updatebool(x = true)
         }
     }
 }

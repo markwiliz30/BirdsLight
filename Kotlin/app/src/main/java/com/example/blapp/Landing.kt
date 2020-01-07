@@ -89,12 +89,11 @@ class Landing : AppCompatActivity() {
                     navController.navigate(R.id.action_setStepFragment_to_landingFragment)
                     CurrentID.UpdateID(num = it.id)
                     CurrentID.Updatebool(x = false)
-                    ShowSaveAlert()
+                    ShowSaveAlert(clicked = it.id , current = CurrentID.getID())
                 } else if (CurrentID.getID() == 7) {
                     navController.navigate(R.id.action_sequence_to_landingFragment)
                     CurrentID.UpdateID(num = it.id)
                     CurrentID.Updatebool(x = false)
-
                 } else if (CurrentID.getID() == 8) {
                     navController.navigate(R.id.action_dayPicker_to_landingFragment)
                     CurrentID.UpdateID(num = it.id)
@@ -231,7 +230,7 @@ class Landing : AppCompatActivity() {
         }
     }
 
-    fun ShowSaveAlert(){
+    fun ShowSaveAlert(clicked: Int , current: Int){
         val mAlertDialog = AlertDialog.Builder(this)
         mAlertDialog.setIcon(R.mipmap.ic_launcher_round) //set alertdialog icon
         mAlertDialog.setTitle("Title!") //set alertdialog title

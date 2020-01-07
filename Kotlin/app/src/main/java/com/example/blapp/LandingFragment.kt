@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import com.example.blapp.common.DeviceProtocol
+import com.example.blapp.common.Protocol
 import kotlinx.android.synthetic.main.fragment_landing.*
 
 /**
@@ -16,12 +18,13 @@ import kotlinx.android.synthetic.main.fragment_landing.*
 class LandingFragment : Fragment() {
 
     lateinit var navController: NavController
+    val deviceProtocol = DeviceProtocol()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+        Protocol.cDeviceProt = deviceProtocol
         return inflater.inflate(R.layout.fragment_landing, container, false)
 
     }
@@ -29,5 +32,11 @@ class LandingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
+        Protocol.cDeviceProt.startChannel()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Protocol.cDeviceProt.stopChannel()
     }
 }

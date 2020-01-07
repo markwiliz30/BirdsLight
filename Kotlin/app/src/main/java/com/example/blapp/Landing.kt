@@ -72,7 +72,7 @@ class Landing : AppCompatActivity() {
 
         //bottomNavigation.setCount(ID_NOTIFICATION, "69")
         bottomNavigation.show(ID_HOME)
-        bottomNavigation
+
         bottomNavigation.setOnClickMenuListener {
             if(aax){
 
@@ -233,6 +233,7 @@ class Landing : AppCompatActivity() {
     }
 
     fun ShowSaveAlert(clicked: Int , current: Int){
+
         val mAlertDialog = AlertDialog.Builder(this)
         mAlertDialog.setIcon(R.mipmap.ic_launcher_round) //set alertdialog icon
         mAlertDialog.setTitle("Title!") //set alertdialog title

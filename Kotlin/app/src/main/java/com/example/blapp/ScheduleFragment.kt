@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import com.CurrentId.extensions.CurrentID
 import kotlinx.android.synthetic.main.fragment_schedule.*
 
 class ScheduleFragment : Fragment() {
@@ -28,8 +27,6 @@ class ScheduleFragment : Fragment() {
         navController = Navigation.findNavController(view)
         btnManageSequence.setOnClickListener{
             navController.navigate(R.id.action_scheduleFragment_to_sequence)
-            CurrentID.UpdateID(num = 7)
-            CurrentID.Updatebool(x = true)
         }
     }
 

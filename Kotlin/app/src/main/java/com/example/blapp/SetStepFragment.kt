@@ -11,7 +11,6 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import kotlinx.android.synthetic.main.fragment_program.*
 import kotlinx.android.synthetic.main.fragment_set_step.*
-import com.CurrentId.extensions.CurrentID
 
 /**
  * A simple [Fragment] subclass.
@@ -30,7 +29,6 @@ class SetStepFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
-
 //        btn_pgm_step.setOnClickListener{
 //
 //        }

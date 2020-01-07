@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.FragmentController
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import com.CurrentId.extensions.CurrentID
 import kotlinx.android.synthetic.main.fragment_sequence.*
 
 /**
@@ -32,8 +31,6 @@ class Sequence : Fragment() {
         navController = Navigation.findNavController(view)
         btnDaysRange.setOnClickListener{
             navController.navigate(R.id.action_sequence_to_dayPicker)
-            CurrentID.UpdateID(num = 8)
-            CurrentID.Updatebool(x = true)
         }
     }
 

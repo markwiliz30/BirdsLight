@@ -23,6 +23,7 @@ import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.os.Handler
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+<<<<<<< HEAD
 import androidx.fragment.app.FragmentManager
 import kotlin.math.log
 import androidx.core.app.ComponentActivity.ExtraData
@@ -32,6 +33,9 @@ import androidx.core.view.isVisible
 import kotlinx.coroutines.delay
 import java.util.*
 import kotlin.concurrent.schedule
+=======
+import kotlin.math.log
+>>>>>>> 2edc2f02a8e76bf64837ed8af47166812086f4b3
 
 
 class Landing : AppCompatActivity() {
@@ -87,6 +91,7 @@ class Landing : AppCompatActivity() {
         bottomNavigation.show(ID_HOME)
 
 
+<<<<<<< HEAD
         bottomNavigation.setOnClickMenuListener {
 
             when (it.id) {
@@ -210,6 +215,130 @@ class Landing : AppCompatActivity() {
             }
 //          }  Toast.makeText(this, "$name is clicked", Toast.LENGTH_SHORT).show()
          }
+=======
+                when (it.id) {
+                    ID_HOME -> if (CurrentID.getID() == 2) {
+                        navController.navigate(R.id.action_testFragment_to_landingFragment)
+                        CurrentID.UpdateID(num = it.id)
+                    } else if (CurrentID.getID() == 3) {
+                        navController.navigate(R.id.action_programFragment_to_landingFragment)
+                        CurrentID.UpdateID(num = it.id)
+                    } else if (CurrentID.getID() == 4) {
+                        navController.navigate(R.id.action_scheduleFragment_to_landingFragment)
+                        CurrentID.UpdateID(num = it.id)
+                    } else if (CurrentID.getID() == 5) {
+                        navController.navigate(R.id.action_settings_to_landingFragment)
+                        CurrentID.UpdateID(num = it.id)
+                    } else if (CurrentID.getID() == 6) {
+                        ShowSaveAlert(clicked = it.id , current = CurrentID.getID())
+                    } else if (CurrentID.getID() == 7) {
+                        navController.navigate(R.id.action_sequence_to_landingFragment)
+                        CurrentID.UpdateID(num = it.id)
+                        CurrentID.Updatebool(x = false)
+                    } else if (CurrentID.getID() == 8) {
+                        navController.navigate(R.id.action_dayPicker_to_landingFragment)
+                        CurrentID.UpdateID(num = it.id)
+                        CurrentID.Updatebool(x = false)
+
+                    }
+
+                    ID_TESTFRAGMENT -> if (CurrentID.getID() == 1) {
+                        navController.navigate(R.id.action_landingFragment_to_testFragment)
+                        CurrentID.UpdateID(num = it.id)
+                    } else if (CurrentID.getID() == 3) {
+                        navController.navigate(R.id.action_programFragment_to_testFragment)
+                        CurrentID.UpdateID(num = it.id)
+                    } else if (CurrentID.getID() == 4) {
+                        navController.navigate(R.id.action_scheduleFragment_to_testFragment)
+                        CurrentID.UpdateID(num = it.id)
+                    } else if (CurrentID.getID() == 5) {
+                        navController.navigate(R.id.action_settings_to_testFragment)
+                        CurrentID.UpdateID(num = it.id)
+                    } else if (CurrentID.getID() == 6) {
+                        navController.navigate(R.id.action_setStepFragment_to_testFragment)
+                        CurrentID.UpdateID(num = it.id)
+                        CurrentID.Updatebool(x = false)
+                    } else if (CurrentID.getID() == 7) {
+                        navController.navigate(R.id.action_sequence_to_testFragment)
+                        CurrentID.UpdateID(num = it.id)
+                        CurrentID.Updatebool(x = false)
+                    } else if (CurrentID.getID() == 8) {
+                        navController.navigate(R.id.action_dayPicker_to_testFragment)
+                        CurrentID.UpdateID(num = it.id)
+                        CurrentID.Updatebool(x = false)
+                    }
+
+                    ID_PROGRAMFRAGMENT -> if (CurrentID.getID() == 1) {
+                        navController.navigate(R.id.action_landingFragment_to_programFragment)
+                        CurrentID.UpdateID(num = it.id)
+                    } else if (CurrentID.getID() == 2) {
+                        navController.navigate(R.id.action_testFragment_to_programFragment)
+                        CurrentID.UpdateID(num = it.id)
+                    } else if (CurrentID.getID() == 4) {
+                        navController.navigate(R.id.action_scheduleFragment_to_programFragment)
+                        CurrentID.UpdateID(num = it.id)
+                    } else if (CurrentID.getID() == 5) {
+                        navController.navigate(R.id.action_settings_to_programFragment)
+                        CurrentID.UpdateID(num = it.id)
+                    } else if (CurrentID.getID() == 7) {
+                        navController.navigate(R.id.action_sequence_to_programFragment)
+                        CurrentID.UpdateID(num = it.id)
+                        CurrentID.Updatebool(x = false)
+                    } else if (CurrentID.getID() == 8) {
+                        navController.navigate(R.id.action_dayPicker_to_programFragment)
+                        CurrentID.UpdateID(num = it.id)
+                        CurrentID.Updatebool(x = false)
+                    }
+
+                    ID_SCHEDULEFRAGMENT -> if (CurrentID.getID() == 1) {
+                        navController.navigate(R.id.action_landingFragment_to_scheduleFragment)
+                        CurrentID.UpdateID(num = it.id)
+                    } else if (CurrentID.getID() == 2) {
+                        navController.navigate(R.id.action_testFragment_to_scheduleFragment)
+                        CurrentID.UpdateID(num = it.id)
+                    } else if (CurrentID.getID() == 3) {
+                        navController.navigate(R.id.action_programFragment_to_scheduleFragment)
+                        CurrentID.UpdateID(num = it.id)
+                    } else if (CurrentID.getID() == 5) {
+                        navController.navigate(R.id.action_settings_to_scheduleFragment)
+                        CurrentID.UpdateID(num = it.id)
+                    } else if (CurrentID.getID() == 6) {
+                        navController.navigate(R.id.action_setStepFragment_to_scheduleFragment)
+                        CurrentID.UpdateID(num = it.id)
+                        CurrentID.Updatebool(x = false)
+                    }
+
+                    ID_SETTINGSFRAGMENT -> if (CurrentID.getID() == 1) {
+                        navController.navigate(R.id.action_landingFragment_to_settings)
+                        CurrentID.UpdateID(num = it.id)
+                    } else if (CurrentID.getID() == 2) {
+                        navController.navigate(R.id.action_testFragment_to_settings)
+                        CurrentID.UpdateID(num = it.id)
+                    } else if (CurrentID.getID() == 3) {
+                        navController.navigate(R.id.action_programFragment_to_settings)
+                        CurrentID.UpdateID(num = it.id)
+                    } else if (CurrentID.getID() == 4) {
+                        navController.navigate(R.id.action_scheduleFragment_to_settings)
+                        CurrentID.UpdateID(num = it.id)
+                    } else if (CurrentID.getID() == 6) {
+                        navController.navigate(R.id.action_setStepFragment_to_settings)
+                        CurrentID.UpdateID(num = it.id)
+                        CurrentID.Updatebool(x = false)
+                    } else if (CurrentID.getID() == 7) {
+                        navController.navigate(R.id.action_sequence_to_settings)
+                        CurrentID.UpdateID(num = it.id)
+                        CurrentID.Updatebool(x = false)
+                    } else if (CurrentID.getID() == 8) {
+                        navController.navigate(R.id.action_dayPicker_to_settings)
+                        CurrentID.UpdateID(num = it.id)
+                        CurrentID.Updatebool(x = false)
+                    }
+
+                    else -> navController.navigate(R.id.action_landingFragment_to_testFragment)
+                }
+//            Toast.makeText(this, "$name is clicked", Toast.LENGTH_SHORT).show()
+            } }
+>>>>>>> 2edc2f02a8e76bf64837ed8af47166812086f4b3
     }
 
     private var doubleBackToExitPressedOnce = false

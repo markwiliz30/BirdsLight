@@ -19,22 +19,18 @@
         android:layout_gravity="center"
         android:textColor="#39405A"/>
 
-    <ScrollView
+    <!--tools:listitem="@layout/fragment_program_list"        //add this to preview the item list on recycler-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_pgm"
         android:layout_width="match_parent"
-        android:layout_height="300dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
-    </ScrollView>
+        android:layout_height="400dp">
+    </androidx.recyclerview.widget.RecyclerView>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:gravity="center"
-        android:orientation="horizontal"
-        >
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/btnNewProgram"
@@ -61,8 +57,6 @@
             android:paddingHorizontal="10dp"
             android:text="Import"
             android:textSize="15dp"/>
-
-
 
     </LinearLayout>
 </LinearLayout>

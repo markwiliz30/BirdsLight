@@ -237,7 +237,7 @@ class Landing : AppCompatActivity() {
         } else {
             if (doubleBackToExitPressedOnce) {
                 CurrentID.UpdateID(num = ID_HOME)
-                finish()
+                finishAffinity()
             }else{
                 this.doubleBackToExitPressedOnce = true
                 Toast.makeText(this, "Press BACK again to exit", Toast.LENGTH_SHORT).show()

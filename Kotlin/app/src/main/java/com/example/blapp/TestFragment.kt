@@ -86,34 +86,6 @@ class TestFragment : Fragment() {
             Toast.makeText(context, "Testing Program 3 Running", Toast.LENGTH_SHORT).show()
         }
 
-        tglPgm4.setOnClickListener{
-            Toast.makeText(context, "Testing Program 4 Running", Toast.LENGTH_SHORT).show()
-        }
-
-        tglPgm5.setOnClickListener{
-            Toast.makeText(context, "Testing Program 5 Running", Toast.LENGTH_SHORT).show()
-        }
-
-        tglPgm6.setOnClickListener{
-            Toast.makeText(context, "Testing Program 6 Running", Toast.LENGTH_SHORT).show()
-        }
-
-        tglPgm7.setOnClickListener{
-            Toast.makeText(context, "Testing Program 7 Running", Toast.LENGTH_SHORT).show()
-        }
-
-        tglPgm8.setOnClickListener{
-            Toast.makeText(context, "Testing Program 8 Running", Toast.LENGTH_SHORT).show()
-        }
-
-        tglPgm9.setOnClickListener{
-            Toast.makeText(context, "Testing Program 9 Running", Toast.LENGTH_SHORT).show()
-        }
-
-        tglPgm10.setOnClickListener{
-            Toast.makeText(context, "Testing Program 10 Running", Toast.LENGTH_SHORT).show()
-        }
-
         btnReset.setOnClickListener{
             Toast.makeText(context, "Resetting the device", Toast.LENGTH_SHORT).show()
         }

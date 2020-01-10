@@ -7,7 +7,14 @@
     tools:context=".TestFragment"
     android:orientation="vertical">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:id="@+id/lblProgram"
@@ -15,81 +22,42 @@
         android:layout_height="wrap_content"
         android:text="Select program"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="100dp"
         android:textStyle="bold"
         android:textSize="30dp"
+        android:layout_marginTop="30dp"
         android:textColor="#39405A" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="75dp"
         android:padding="10dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:gravity="center_horizontal">
-        <ToggleButton
+        <Button
             android:id="@+id/tglPgm1"
             android:layout_width="60dp"
             android:layout_height="wrap_content"
-            android:checked="false"
-            android:text="pgm1"
-            android:textOff="1"
-            android:textOn="1"
-            android:layout_marginHorizontal="5dp"
+            android:text="1"
+            android:layout_marginHorizontal="15dp"
             android:background="@drawable/button_model"
             android:textColor="#14BED1"
             android:textSize="15dp"/>
 
-        <ToggleButton
+        <Button
             android:id="@+id/tglPgm2"
             android:layout_width="60dp"
             android:layout_height="wrap_content"
-
-            android:checked="false"
-            android:text="pgm2"
-            android:textOff="2"
-            android:textOn="2"
-            android:layout_marginHorizontal="5dp"
+            android:text="2"
+            android:layout_marginHorizontal="15dp"
             android:background="@drawable/button_model"
             android:textColor="#14BED1"
             android:textSize="15dp"/>
 
-        <ToggleButton
+        <Button
             android:id="@+id/tglPgm3"
             android:layout_width="60dp"
             android:layout_height="wrap_content"
-
-            android:checked="false"
-            android:text="pgm3"
-            android:textOff="3"
-            android:textOn="3"
-            android:layout_marginHorizontal="5dp"
-            android:background="@drawable/button_model"
-            android:textColor="#14BED1"
-            android:textSize="15dp"/>
-
-        <ToggleButton
-            android:id="@+id/tglPgm4"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-
-            android:checked="false"
-            android:text="pgm4"
-            android:textOff="4"
-            android:textOn="4"
-            android:layout_marginHorizontal="5dp"
-            android:background="@drawable/button_model"
-            android:textColor="#14BED1"
-            android:textSize="15dp"/>
-
-        <ToggleButton
-            android:id="@+id/tglPgm5"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-
-            android:checked="false"
-            android:text="pgm5"
-            android:textOff="5"
-            android:textOn="5"
-            android:layout_marginHorizontal="5dp"
+            android:text="3"
+            android:layout_marginHorizontal="15dp"
             android:background="@drawable/button_model"
             android:textColor="#14BED1"
             android:textSize="15dp"/>
@@ -97,102 +65,137 @@
     </LinearLayout>
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="75dp"
-        android:padding="10dp"
-        android:gravity="center_horizontal">
-        <ToggleButton
-            android:id="@+id/tglPgm6"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:checked="false"
-            android:text="pgm6"
-            android:textOff="6"
-            android:textOn="6"
-            android:layout_marginHorizontal="5dp"
-            android:background="@drawable/button_model"
-            android:textColor="#14BED1"
-            android:textSize="15dp"/>
 
-        <ToggleButton
-            android:id="@+id/tglPgm7"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
 
-            android:checked="false"
-            android:text="pgm7"
-            android:textOff="7"
-            android:textOn="7"
-            android:layout_marginHorizontal="5dp"
-            android:background="@drawable/button_model"
-            android:textColor="#14BED1"
-            android:textSize="15dp"/>
 
-        <ToggleButton
-            android:id="@+id/tglPgm8"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="10dp"
+                android:padding="10dp"
+                android:orientation="horizontal">
 
-            android:checked="false"
-            android:text="pgm8"
-            android:textOff="8"
-            android:textOn="8"
-            android:layout_marginHorizontal="5dp"
-            android:background="@drawable/button_model"
-            android:textColor="#14BED1"
-            android:textSize="15dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pan: "
+                    android:textSize="25dp"
+                    android:textColor="#39405A"
+                    android:textStyle="bold"
+                    android:layout_marginStart="30dp"
+                    android:layout_gravity="center"
+                    />
 
-        <ToggleButton
-            android:id="@+id/tglPgm9"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
+                <EditText
+                    android:id="@+id/update_pan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxLength="255"
+                    android:text="000"
+                    android:textSize="15dp"
+                    android:inputType="number"
+                    android:textColor="#39405A"
+                    />
 
-            android:checked="false"
-            android:text="pgm9"
-            android:textOff="9"
-            android:textOn="9"
-            android:layout_marginHorizontal="5dp"
-            android:background="@drawable/button_model"
-            android:textColor="#14BED1"
-            android:textSize="15dp"/>
 
-        <ToggleButton
-            android:id="@+id/tglPgm10"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
+            </LinearLayout>
 
-            android:checked="false"
-            android:text="pgm10"
-            android:textOff="10"
-            android:textOn="10"
-            android:layout_marginHorizontal="5dp"
-            android:background="@drawable/button_model"
-            android:textColor="#14BED1"
-            android:textSize="15dp"/>
 
-    </LinearLayout>
-    <TextView
-        android:id="@+id/lblActive"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Active Program :"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp"
-        android:textStyle="bold"
-        android:textSize="15dp"
-        android:textColor="#39405A" />
 
-    <TextView
-        android:id="@+id/lblReset"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Set to default position"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp"
-        android:textStyle="bold"
-        android:textSize="30dp"
-        android:textColor="#39405A" />
+                <SeekBar
+                    android:id="@+id/sbPan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_weight="1"
+                    />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="10dp"
+                android:padding="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tilt: "
+                    android:textSize="25dp"
+                    android:textColor="#39405A"
+                    android:textStyle="bold"
+                    android:layout_marginStart="30dp"
+                    android:layout_gravity="center"
+                    />
+
+                <EditText
+                    android:id="@+id/update_tilt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxLength="255"
+                    android:text="000"
+                    android:textSize="15dp"
+                    android:inputType="number"
+                    android:textColor="#39405A"
+                    />
+
+
+            </LinearLayout>
+
+
+                <SeekBar
+                    android:id="@+id/sbTilt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginHorizontal="10dp"
+                    />
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="10dp"
+                android:padding="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Blink: "
+                    android:textSize="25dp"
+                    android:textColor="#39405A"
+                    android:textStyle="bold"
+                    android:layout_marginStart="30dp"
+                    android:layout_gravity="center"
+                    />
+
+                <EditText
+                    android:id="@+id/update_blink"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxLength="255"
+                    android:text="000"
+                    android:textSize="15dp"
+                    android:inputType="number"
+                    android:textColor="#39405A"
+                    />
+
+
+            </LinearLayout>
+
+
+
+                <SeekBar
+                    android:id="@+id/sbBlink"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginHorizontal="10dp"
+                    />
+
 
     <Button
         android:id="@+id/btnReset"
@@ -208,6 +211,6 @@
 
         />
 
-
-
+        </LinearLayout>
+</ScrollView>
 </LinearLayout>

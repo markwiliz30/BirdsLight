@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SeekBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
@@ -15,6 +16,9 @@ import kotlinx.android.synthetic.main.fragment_test.*
 class TestFragment : Fragment() {
 
     lateinit var navController: NavController
+    internal var pVal: Int = 0
+    internal var tVal:Int = 0
+    internal var bVal:Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,10 +46,9 @@ class TestFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
-        var command: Byte
+        var command: Byte = 0x02
         var data: ByteArray
         tglPgm1.setOnClickListener{
-            command = 0x02
             data = byteArrayOf(
                 0x01.toByte(),
                 0x01.toByte(),
@@ -59,7 +62,6 @@ class TestFragment : Fragment() {
         }
 
         tglPgm2.setOnClickListener{
-            command = 0x02
             data = byteArrayOf(
                 0x01.toByte(),
                 0x01.toByte(),
@@ -73,7 +75,6 @@ class TestFragment : Fragment() {
         }
 
         tglPgm3.setOnClickListener{
-            command = 0x02
             data = byteArrayOf(
                 0x01.toByte(),
                 0x01.toByte(),
@@ -89,5 +90,77 @@ class TestFragment : Fragment() {
         btnReset.setOnClickListener{
             Toast.makeText(context, "Resetting the device", Toast.LENGTH_SHORT).show()
         }
+
+        test_pan_sb.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                pVal = progress
+                data = byteArrayOf(
+                    0x01.toByte(),
+                    0x01.toByte(),
+                    pVal.toByte(),
+                    tVal.toByte(),
+                    bVal.toByte(),
+                    0x01.toByte()
+                )
+                Protocol.cDeviceProt.transferDataWithDelay(command, data)
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+
+            }
+
+        })
+
+        test_tilt_sb.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                tVal = progress
+                data = byteArrayOf(
+                    0x01.toByte(),
+                    0x01.toByte(),
+                    pVal.toByte(),
+                    tVal.toByte(),
+                    bVal.toByte(),
+                    0x01.toByte()
+                )
+                Protocol.cDeviceProt.transferDataWithDelay(command, data)
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+
+            }
+
+        })
+
+        test_blink_sb.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                bVal = progress
+                data = byteArrayOf(
+                    0x01.toByte(),
+                    0x01.toByte(),
+                    pVal.toByte(),
+                    tVal.toByte(),
+                    bVal.toByte(),
+                    0x01.toByte()
+                )
+                Protocol.cDeviceProt.transferDataWithDelay(command, data)
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+
+            }
+
+        })
     }
 }

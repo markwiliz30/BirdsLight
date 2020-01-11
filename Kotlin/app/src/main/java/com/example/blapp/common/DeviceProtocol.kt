@@ -101,21 +101,21 @@ class DeviceProtocol : Handler.Callback, OnSocketListener {
         }
     }
 
-    fun setData(lXData: Int, lYData: Int, lLData: Int): ByteArray {
-        var x: Byte = 0
-        var y: Byte = 0
-        var l: Byte = 0
-        for (i in 0 until lXData) {
-            x++
-        }
-        for (j in 0 until lYData) {
-            y++
-        }
-        for (k in 0 until lLData) {
-            l++
-        }
-        return byteArrayOf(x, y, l)
-    }
+//    fun setData(lXData: Int, lYData: Int, lLData: Int): ByteArray {
+//        var x: Byte = 0
+//        var y: Byte = 0
+//        var l: Byte = 0
+//        for (i in 0 until lXData) {
+//            x++
+//        }
+//        for (j in 0 until lYData) {
+//            y++
+//        }
+//        for (k in 0 until lLData) {
+//            l++
+//        }
+//        return byteArrayOf(x, y, l)
+//    }
 
     private fun sendData() {
         byteDataLength = dataLengthCounterHex(dataLength)

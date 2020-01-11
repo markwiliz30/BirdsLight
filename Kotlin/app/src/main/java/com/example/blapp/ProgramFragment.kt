@@ -8,16 +8,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.CurrentId.extensions.CurrentID
 import com.example.blapp.adapter.PgmAdapter
+import com.example.blapp.collection.PgmCollection
 import com.example.blapp.helper.MyButton
 import com.example.blapp.helper.MySwipeHelper
 import com.example.blapp.listener.MyButtonClickListener
 import com.example.blapp.model.PgmItem
+import com.example.blapp.model.StepItem
 import kotlinx.android.synthetic.main.fragment_program.*
 
 class ProgramFragment : Fragment(){
@@ -88,7 +91,7 @@ class ProgramFragment : Fragment(){
         while (i<50)
         {
             var pgmNum = ++i
-          itemList.add(PgmItem(0x02, pgmNum.toByte()))
+          itemList.add(PgmItem())
             i++
         }
         adapter = PgmAdapter(activity, itemList)
@@ -98,8 +101,19 @@ class ProgramFragment : Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
-        btnNewProgram.setOnClickListener{
-            navController.navigate(R.id.action_programFragment_to_setStepFragment)
+        btn_new_pgm.setOnClickListener{
+            var createdPgmIndex = 0
+            if(PgmCollection.pgmList == null)
+            {
+                createdPgmIndex = 1
+            }
+            else
+            {
+                createdPgmIndex = PgmCollection.pgmList!!.count() + 1
+            }
+
+            val bundle = bundleOf("parentPgmIndex" to  createdPgmIndex)
+            navController.navigate(R.id.action_programFragment_to_setStepFragment, bundle)
             CurrentID.UpdateID(num = 6)
             CurrentID.Updatebool(x = true)
         }

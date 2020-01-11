@@ -10,7 +10,10 @@ import android.widget.SeekBar
 import androidx.fragment.app.FragmentController
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import com.bumptech.glide.load.model.ByteBufferEncoder
 import com.example.blapp.common.Protocol
+import com.example.blapp.model.PgmItem
+import com.example.blapp.model.StepItem
 import kotlinx.android.synthetic.main.fragment_program.*
 import kotlinx.android.synthetic.main.fragment_set_step.*
 
@@ -20,34 +23,37 @@ import kotlinx.android.synthetic.main.fragment_set_step.*
 class SetStepFragment : Fragment() {
 
     lateinit var navController: NavController
+    var parentPgmIndex: Int = 0
     internal var pVal: Int = 0
     internal var tVal:Int = 0
     internal var bVal:Int = 0
+    lateinit var tempStepList: MutableList<StepItem>
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        parentPgmIndex = arguments!!.getInt("parentPgmIndex")
         return inflater.inflate(R.layout.fragment_set_step, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
-        var movData = ByteArray(3)
         val command: Byte = 0x02
         var data: ByteArray
+
+        step_parent_pgm.text = parentPgmIndex.toString()
 
         edit_pan_sb.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 pVal = progress
-                movData = Protocol.cDeviceProt.setData(pVal, tVal, bVal)
                 data = byteArrayOf(
                     0x01.toByte(),
                     0x01.toByte(),
-                    movData[0],
-                    movData[1],
-                    movData[2],
+                    pVal.toByte(),
+                    tVal.toByte(),
+                    bVal.toByte(),
                     0x01.toByte()
                 )
                 Protocol.cDeviceProt.transferDataWithDelay(command, data)
@@ -65,13 +71,12 @@ class SetStepFragment : Fragment() {
         edit_tilt_sb.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 tVal = progress
-                movData = Protocol.cDeviceProt.setData(pVal, tVal, bVal)
                 data = byteArrayOf(
                     0x01.toByte(),
                     0x01.toByte(),
-                    movData[0],
-                    movData[1],
-                    movData[2],
+                    pVal.toByte(),
+                    tVal.toByte(),
+                    bVal.toByte(),
                     0x01.toByte()
                 )
                 Protocol.cDeviceProt.transferDataWithDelay(command, data)
@@ -90,13 +95,12 @@ class SetStepFragment : Fragment() {
         edit_blink_sb.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 bVal = progress
-                movData = Protocol.cDeviceProt.setData(pVal, tVal, bVal)
                 data = byteArrayOf(
                     0x01.toByte(),
                     0x01.toByte(),
-                    movData[0],
-                    movData[1],
-                    movData[2],
+                    pVal.toByte(),
+                    tVal.toByte(),
+                    bVal.toByte(),
                     0x01.toByte()
                 )
                 Protocol.cDeviceProt.transferDataWithDelay(command, data)
@@ -111,5 +115,38 @@ class SetStepFragment : Fragment() {
             }
 
         })
+
+        btn_step_save.setOnClickListener{
+            var createdPgm = PgmItem()
+            val createdPgmCommand = 0x03
+            createdPgm.command = createdPgmCommand as Byte
+            createdPgm.pgm = parentPgmIndex as Byte
+        }
+    }
+
+    fun AddStep(pan: Byte, tilt: Byte, blink: Byte, time: Byte)
+    {
+        val command = 0x02
+        val newStep = StepItem()
+        var stepIndex = 0
+        newStep.command = command as Byte
+        newStep.pgm = parentPgmIndex as Byte
+
+        if(tempStepList == null)
+        {
+            stepIndex = 1
+        }
+        else
+        {
+            stepIndex = tempStepList.count() + 1
+        }
+
+        newStep.step = stepIndex as Byte
+        newStep.pan = pan
+        newStep.tilt = tilt
+        newStep.blink = blink
+        newStep.time = time
+
+        tempStepList.add(newStep)
     }
 }

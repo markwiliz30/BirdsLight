@@ -40,7 +40,16 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Program-1"
+            android:text="Program-"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:textColor="#39405A"
+            />
+        <TextView
+            android:id="@+id/step_parent_pgm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00"
             android:textStyle="bold"
             android:textSize="20dp"
             android:textColor="#39405A"
@@ -287,7 +296,7 @@
         android:orientation="horizontal"
         android:layout_marginBottom="20dp">
         <Button
-            android:id="@+id/btnSaveStep"
+            android:id="@+id/btn_step_save"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_weight="1"

@@ -73,6 +73,16 @@ class TestFragment : Fragment() {
         }
 
         tglPgm3.setOnClickListener{
+            command = 0x02
+            data = byteArrayOf(
+                0x01.toByte(),
+                0x01.toByte(),
+                0x80.toByte(),
+                0x80.toByte(),
+                0x80.toByte(),
+                0x01.toByte()
+            )
+            Protocol.cDeviceProt.transferDataWithDelay(command, data)
             Toast.makeText(context, "Testing Program 3 Running", Toast.LENGTH_SHORT).show()
         }
 

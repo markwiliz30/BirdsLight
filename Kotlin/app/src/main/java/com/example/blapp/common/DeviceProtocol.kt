@@ -185,19 +185,20 @@ class DeviceProtocol : Handler.Callback, OnSocketListener {
     override fun handleMessage(msg: Message): Boolean {
         val bundle = msg.data
         val text = bundle.getString("text")
+        val firstChar = text!!.get(0) + ""
+        val secondChar = text!!.get(1) + ""
+        val thirdChar = text!!.get(2) + ""
+        val receivedAuth = firstChar + secondChar + thirdChar
         val authComp = "AUD"
         val recogComp = "RED"
-        if (text == authComp) {
+        if (receivedAuth.equals(authComp)) {
             canAccess = true
-        }
-        if (text == recogComp) {
             isRecognized = true
         }
+//        if (text == recogComp) {
+//            isRecognized = true
+//        }
         return false
-    }
-
-    fun onReceived(deviceProtocol: DeviceProtocol, text: String?) {
-
     }
 
     override fun onReceived(msg: String) {

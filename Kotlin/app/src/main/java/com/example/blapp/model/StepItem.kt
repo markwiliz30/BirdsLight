@@ -1,6 +1,8 @@
 package com.example.blapp.model
 
 class StepItem {
+    var command: Byte? = 0
+    var step_id: Byte? = 0
     var pgm: Byte? = 0
     var step: Byte? = 0
     var pan: Byte? = 0
@@ -14,4 +16,5 @@ class StepItem {
     set(value){
         field = value
     }
+
 }

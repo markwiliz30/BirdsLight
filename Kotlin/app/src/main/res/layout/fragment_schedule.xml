@@ -99,7 +99,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/button_model"
-            android:drawableRight="@drawable/ic_save_black_24dp"
+            android:drawableRight="@drawable/ic_save_dark_blue_24dp"
             android:textColor="#14BED1"
             android:paddingHorizontal="30dp"
             android:layout_marginHorizontal="10dp"/>

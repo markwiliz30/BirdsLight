@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.CurrentId.extensions.CurrentID
 import com.example.blapp.adapter.PgmAdapter
 import com.example.blapp.collection.PgmCollection
+import com.example.blapp.databasehelper.stepmanager
 import com.example.blapp.helper.MyButton
 import com.example.blapp.helper.MySwipeHelper
 import com.example.blapp.listener.MyButtonClickListener
@@ -30,11 +31,16 @@ class ProgramFragment : Fragment(){
 
     lateinit var adapter: PgmAdapter
 
+    internal lateinit var db_step:stepmanager
+    internal var lststep: List<StepItem> = ArrayList<StepItem>()
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_program, container, false)
+        db_step = stepmanager(activity)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -75,6 +81,24 @@ class ProgramFragment : Fragment(){
                         object : MyButtonClickListener{
                             override fun onClick(pos: Int) {
                                 Toast.makeText(activity, "UPDATE ID"+pos, Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    )
+                )
+
+                buffer.add(
+                    MyButton(activity,
+                        "Save",
+                        30,
+                        R.drawable.ic_save_dark_blue_24dp,
+                        Color.parseColor("#14BED1"),
+                        object : MyButtonClickListener{
+                            override fun onClick(pos: Int) {
+                                val step = StepItem(
+                                    
+                                )
+
+
                             }
                         }
                     )

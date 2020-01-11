@@ -29,6 +29,10 @@ import androidx.core.app.ComponentActivity.ExtraData
 import androidx.core.content.ContextCompat.getSystemService
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import androidx.core.view.isVisible
+import com.example.blapp.databasehelper.pgmmanager
+import com.example.blapp.databasehelper.stepmanager
+import com.example.blapp.model.PgmItem
+import com.example.blapp.model.StepItem
 import kotlinx.coroutines.delay
 import java.util.*
 import kotlin.concurrent.schedule
@@ -50,6 +54,7 @@ class Landing : AppCompatActivity() {
         private var aax = true
     }
 
+
     lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,25 +67,25 @@ class Landing : AppCompatActivity() {
         bottomNavigation.add(
             MeowBottomNavigation.Model(
                 ID_TESTFRAGMENT,
-                R.drawable.ic_home_black_24dp
+                R.drawable.ic_test_black_24dp
             )
         )
         bottomNavigation.add(
             MeowBottomNavigation.Model(
                 ID_PROGRAMFRAGMENT,
-                R.drawable.ic_home_black_24dp
+                R.drawable.ic_view_list_black_24dp
             )
         )
         bottomNavigation.add(
             MeowBottomNavigation.Model(
                 ID_SCHEDULEFRAGMENT,
-                R.drawable.ic_home_black_24dp
+                R.drawable.ic_schedule_black_24dp
             )
         )
         bottomNavigation.add(
             MeowBottomNavigation.Model(
                 ID_SETTINGSFRAGMENT,
-                R.drawable.ic_home_black_24dp
+                R.drawable.ic_settings_black_24dp
             )
         )
 
@@ -215,6 +220,7 @@ class Landing : AppCompatActivity() {
 //
 
     }
+
 
     private var doubleBackToExitPressedOnce = false
 

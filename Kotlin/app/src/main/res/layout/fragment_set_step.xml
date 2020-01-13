@@ -258,7 +258,7 @@
             />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingActionButton4"
+            android:id="@+id/btn_dec_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
@@ -267,7 +267,7 @@
             app:fabSize="mini"/>
 
         <EditText
-            android:id="@+id/update_time"
+            android:id="@+id/txt_step_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:maxLength="99"
@@ -278,7 +278,7 @@
 
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingActionButton3"
+            android:id="@+id/btn_inc_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"

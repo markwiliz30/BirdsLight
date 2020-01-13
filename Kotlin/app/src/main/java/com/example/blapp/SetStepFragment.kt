@@ -1,11 +1,13 @@
 package com.example.blapp
 
-
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.SeekBar
 import androidx.fragment.app.FragmentController
 import androidx.navigation.NavController
@@ -27,13 +29,16 @@ class SetStepFragment : Fragment() {
     internal var pVal: Int = 0
     internal var tVal:Int = 0
     internal var bVal:Int = 0
+    internal var tmVal: Int = 0
     lateinit var tempStepList: MutableList<StepItem>
+    lateinit var currentStep: StepItem
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         parentPgmIndex = arguments!!.getInt("parentPgmIndex")
+        currentStep = StepItem()
         return inflater.inflate(R.layout.fragment_set_step, container, false)
     }
 
@@ -44,6 +49,7 @@ class SetStepFragment : Fragment() {
         var data: ByteArray
 
         step_parent_pgm.text = parentPgmIndex.toString()
+        txt_step_time.setText(tmVal.toString())
 
         edit_pan_sb.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
@@ -56,6 +62,7 @@ class SetStepFragment : Fragment() {
                     bVal.toByte(),
                     0x01.toByte()
                 )
+                currentStep.pan = pVal.toByte()
                 Protocol.cDeviceProt.transferDataWithDelay(command, data)
             }
 
@@ -79,6 +86,7 @@ class SetStepFragment : Fragment() {
                     bVal.toByte(),
                     0x01.toByte()
                 )
+                currentStep.tilt = tVal.toByte()
                 Protocol.cDeviceProt.transferDataWithDelay(command, data)
             }
 
@@ -103,6 +111,7 @@ class SetStepFragment : Fragment() {
                     bVal.toByte(),
                     0x01.toByte()
                 )
+                currentStep.blink = bVal.toByte()
                 Protocol.cDeviceProt.transferDataWithDelay(command, data)
             }
 
@@ -116,6 +125,50 @@ class SetStepFragment : Fragment() {
 
         })
 
+        btn_inc_time.setOnClickListener{
+            if(tmVal < 100)
+            {
+                tmVal++
+                txt_step_time.setText(tmVal.toString())
+            }
+        }
+
+        btn_dec_time.setOnClickListener{
+            if(tmVal > 0)
+            {
+                tmVal--
+                txt_step_time.setText(tmVal.toString())
+            }
+        }
+
+        txt_step_time.addTextChangedListener(object : TextWatcher{
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if(txt_step_time.text.isEmpty())
+                {
+                   txt_step_time.setText("0")
+                    tmVal = 0
+                }
+                else if(txt_step_time.text.toString().toInt() > 99)
+                {
+                    txt_step_time.setText("99")
+                    tmVal = 99
+                }
+                else
+                {
+                    tmVal = txt_step_time.text.toString().toInt()
+                }
+                currentStep.time = tmVal.toByte()
+            }
+        })
+
         btn_step_save.setOnClickListener{
             var createdPgm = PgmItem()
             val createdPgmCommand = 0x03
@@ -124,14 +177,10 @@ class SetStepFragment : Fragment() {
         }
     }
 
-    fun AddStep(pan: Byte, tilt: Byte, blink: Byte, time: Byte)
+    fun SetCurrentStep(pan: Byte, tilt: Byte, blink: Byte, time: Byte)
     {
         val command = 0x02
-        val newStep = StepItem()
         var stepIndex = 0
-        newStep.command = command as Byte
-        newStep.pgm = parentPgmIndex as Byte
-
         if(tempStepList == null)
         {
             stepIndex = 1
@@ -141,12 +190,12 @@ class SetStepFragment : Fragment() {
             stepIndex = tempStepList.count() + 1
         }
 
-        newStep.step = stepIndex as Byte
-        newStep.pan = pan
-        newStep.tilt = tilt
-        newStep.blink = blink
-        newStep.time = time
-
-        tempStepList.add(newStep)
+        currentStep.command = command as Byte
+        currentStep.pgm = parentPgmIndex as Byte
+        currentStep.step = stepIndex as Byte
+        currentStep.pan = pan
+        currentStep.tilt = tilt
+        currentStep.blink = blink
+        //currentStep.time =
     }
 }

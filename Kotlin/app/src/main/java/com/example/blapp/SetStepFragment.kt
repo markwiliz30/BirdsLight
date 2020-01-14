@@ -13,6 +13,8 @@ import androidx.fragment.app.FragmentController
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.bumptech.glide.load.model.ByteBufferEncoder
+import com.example.blapp.collection.PgmCollection
+import com.example.blapp.collection.StepCollection
 import com.example.blapp.common.Protocol
 import com.example.blapp.model.PgmItem
 import com.example.blapp.model.StepItem
@@ -26,19 +28,19 @@ class SetStepFragment : Fragment() {
 
     lateinit var navController: NavController
     var parentPgmIndex: Int = 0
+    var stepIndex: Int = 0
     internal var pVal: Int = 0
     internal var tVal:Int = 0
     internal var bVal:Int = 0
     internal var tmVal: Int = 0
-    lateinit var tempStepList: MutableList<StepItem>
-    lateinit var currentStep: StepItem
+    var tempStepList: MutableList<StepItem> = mutableListOf()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         parentPgmIndex = arguments!!.getInt("parentPgmIndex")
-        currentStep = StepItem()
+        stepIndex = 1
         return inflater.inflate(R.layout.fragment_set_step, container, false)
     }
 
@@ -50,6 +52,7 @@ class SetStepFragment : Fragment() {
 
         step_parent_pgm.text = parentPgmIndex.toString()
         txt_step_time.setText(tmVal.toString())
+        txt_step_num.setText(stepIndex.toString())
 
         edit_pan_sb.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
@@ -62,7 +65,6 @@ class SetStepFragment : Fragment() {
                     bVal.toByte(),
                     0x01.toByte()
                 )
-                currentStep.pan = pVal.toByte()
                 Protocol.cDeviceProt.transferDataWithDelay(command, data)
             }
 
@@ -86,7 +88,6 @@ class SetStepFragment : Fragment() {
                     bVal.toByte(),
                     0x01.toByte()
                 )
-                currentStep.tilt = tVal.toByte()
                 Protocol.cDeviceProt.transferDataWithDelay(command, data)
             }
 
@@ -97,7 +98,6 @@ class SetStepFragment : Fragment() {
             override fun onStopTrackingTouch(seekBar: SeekBar?) {
 
             }
-
         })
 
         edit_blink_sb.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
@@ -111,7 +111,6 @@ class SetStepFragment : Fragment() {
                     bVal.toByte(),
                     0x01.toByte()
                 )
-                currentStep.blink = bVal.toByte()
                 Protocol.cDeviceProt.transferDataWithDelay(command, data)
             }
 
@@ -165,37 +164,102 @@ class SetStepFragment : Fragment() {
                 {
                     tmVal = txt_step_time.text.toString().toInt()
                 }
-                currentStep.time = tmVal.toByte()
             }
         })
+
+        btn_inc_step.setOnClickListener{
+            stepIndex++
+            if((stepIndex-2) < tempStepList.count())
+            {
+                AddStep(stepIndex -1)
+                SetCurrentStepValues(stepIndex)
+                txt_step_num.setText(stepIndex.toString())
+            }
+            else
+            {
+                stepIndex--
+            }
+        }
+
+        btn_dec_step.setOnClickListener{
+            stepIndex--
+            if(stepIndex == 0){
+                stepIndex = 1
+            }
+            else
+            {
+                AddStep(stepIndex + 1)
+                SetCurrentStepValues(stepIndex)
+                txt_step_num.setText(stepIndex.toString())
+            }
+        }
+
+        btn_add_step.setOnClickListener{
+            AddStep(stepIndex)
+            ResetCurrentStep()
+            stepIndex = tempStepList.count() + 1
+            txt_step_num.setText(stepIndex.toString())
+        }
 
         btn_step_save.setOnClickListener{
             var createdPgm = PgmItem()
             val createdPgmCommand = 0x03
-            createdPgm.command = createdPgmCommand as Byte
-            createdPgm.pgm = parentPgmIndex as Byte
+            createdPgm.command = createdPgmCommand.toByte()
+            createdPgm.pgm = parentPgmIndex.toByte()
+            AddStep(stepIndex)
+            AddPgmToCollection(createdPgm, tempStepList)
+
         }
     }
 
-    fun SetCurrentStep(pan: Byte, tilt: Byte, blink: Byte, time: Byte)
+    private fun AddPgmToCollection(pgm: PgmItem, stepList: List<StepItem>)
     {
-        val command = 0x02
-        var stepIndex = 0
-        if(tempStepList == null)
+        for(item in stepList)
         {
-            stepIndex = 1
-        }
-        else
-        {
-            stepIndex = tempStepList.count() + 1
+            StepCollection.stepCollection!!.add(item)
         }
 
-        currentStep.command = command as Byte
-        currentStep.pgm = parentPgmIndex as Byte
-        currentStep.step = stepIndex as Byte
-        currentStep.pan = pan
-        currentStep.tilt = tilt
-        currentStep.blink = blink
-        //currentStep.time =
+        PgmCollection.pgmCollection!!.add(pgm)
+    }
+
+    private fun SetCurrentStepValues(index: Int)
+    {
+        val newCurrentitem = tempStepList.find { it.step == index.toByte() }
+        tempStepList.remove(newCurrentitem)
+        pVal = newCurrentitem!!.pan!!.toUByte().toInt()
+        tVal = newCurrentitem!!.tilt!!.toUByte().toInt()
+        bVal = newCurrentitem!!.blink!!.toUByte().toInt()
+        tmVal = newCurrentitem!!.time!!.toUByte().toInt()
+
+        edit_pan_sb.progress = pVal
+        edit_tilt_sb.progress = tVal
+        edit_blink_sb.progress = bVal
+        txt_step_time.setText(tmVal.toString())
+    }
+
+    private fun ResetCurrentStep()
+    {
+        pVal = 0
+        tVal = 0
+        bVal = 0
+        tmVal = 0
+
+        edit_pan_sb.progress = pVal
+        edit_tilt_sb.progress = tVal
+        edit_blink_sb.progress = bVal
+        txt_step_time.setText(tmVal.toString())
+    }
+
+    private fun AddStep(index: Int)
+    {
+        val newItem = StepItem()
+        newItem.command = 0x02
+        newItem.pgm = parentPgmIndex.toByte()
+        newItem.step = index.toByte()
+        newItem.pan = pVal.toByte()
+        newItem.tilt = tVal.toByte()
+        newItem.blink = bVal.toByte()
+        newItem.time = tmVal.toByte()
+        tempStepList.add(newItem)
     }
 }

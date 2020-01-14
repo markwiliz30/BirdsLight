@@ -127,13 +127,13 @@ class ProgramFragment : Fragment(){
         navController = Navigation.findNavController(view)
         btn_new_pgm.setOnClickListener{
             var createdPgmIndex = 0
-            if(PgmCollection.pgmList == null)
+            if(PgmCollection.pgmCollection == null)
             {
                 createdPgmIndex = 1
             }
             else
             {
-                createdPgmIndex = PgmCollection.pgmList!!.count() + 1
+                createdPgmIndex = PgmCollection.pgmCollection!!.count() + 1
             }
 
             val bundle = bundleOf("parentPgmIndex" to  createdPgmIndex)

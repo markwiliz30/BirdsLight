@@ -208,7 +208,7 @@ class SetStepFragment : Fragment() {
             createdPgm.pgm = parentPgmIndex.toByte()
             AddStep(stepIndex)
             AddPgmToCollection(createdPgm, tempStepList)
-
+            navController.navigate(R.id.action_setStepFragment_to_programFragment)
         }
     }
 

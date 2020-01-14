@@ -138,13 +138,9 @@ class Landing : AppCompatActivity() {
                 } else if (CurrentID.getID() == ID_SEQUENCEFRAGMENT) {
                     bottomNavigation.isVisible =false
                     ShowSaveAlert(clicked = it.id , current = CurrentID.getID())
-
                 } else if (CurrentID.getID() == ID_DAYPICKERFRAGMENT) {
                     bottomNavigation.isVisible =false
                     ShowSaveAlert(clicked = it.id , current = CurrentID.getID())
-                    navController.navigate(R.id.action_dayPicker_to_testFragment)
-                    CurrentID.UpdateID(num = it.id)
-                    CurrentID.Updatebool(x = false)
                 }
 
                 ID_PROGRAMFRAGMENT -> if (CurrentID.getID() == ID_HOME) {
@@ -160,13 +156,11 @@ class Landing : AppCompatActivity() {
                     navController.navigate(R.id.action_settings_to_programFragment)
                     CurrentID.UpdateID(num = it.id)
                 } else if (CurrentID.getID() == ID_SEQUENCEFRAGMENT) {
-                    navController.navigate(R.id.action_sequence_to_programFragment)
-                    CurrentID.UpdateID(num = it.id)
-                    CurrentID.Updatebool(x = false)
+                    bottomNavigation.isVisible =false
+                    ShowSaveAlert(clicked = it.id , current = CurrentID.getID())
                 } else if (CurrentID.getID() == ID_DAYPICKERFRAGMENT) {
-                    navController.navigate(R.id.action_dayPicker_to_programFragment)
-                    CurrentID.UpdateID(num = it.id)
-                    CurrentID.Updatebool(x = false)
+                    bottomNavigation.isVisible =false
+                    ShowSaveAlert(clicked = it.id , current = CurrentID.getID())
                 }
 
                 ID_SCHEDULEFRAGMENT -> if (CurrentID.getID() == ID_HOME) {
@@ -182,9 +176,8 @@ class Landing : AppCompatActivity() {
                     navController.navigate(R.id.action_settings_to_scheduleFragment)
                     CurrentID.UpdateID(num = it.id)
                 } else if (CurrentID.getID() == ID_STEPFRAGMENT) {
-                    navController.navigate(R.id.action_setStepFragment_to_scheduleFragment)
-                    CurrentID.UpdateID(num = it.id)
-                    CurrentID.Updatebool(x = false)
+                    bottomNavigation.isVisible =false
+                    ShowSaveAlert(clicked = it.id , current = CurrentID.getID())
                 }
 
                 ID_SETTINGSFRAGMENT -> if (CurrentID.getID() == ID_HOME) {
@@ -200,17 +193,14 @@ class Landing : AppCompatActivity() {
                     navController.navigate(R.id.action_scheduleFragment_to_settings)
                     CurrentID.UpdateID(num = it.id)
                 } else if (CurrentID.getID() == ID_STEPFRAGMENT) {
-                    navController.navigate(R.id.action_setStepFragment_to_settings)
-                    CurrentID.UpdateID(num = it.id)
-                    CurrentID.Updatebool(x = false)
+                    bottomNavigation.isVisible =false
+                    ShowSaveAlert(clicked = it.id , current = CurrentID.getID())
                 } else if (CurrentID.getID() == ID_SEQUENCEFRAGMENT) {
-                    navController.navigate(R.id.action_sequence_to_settings)
-                    CurrentID.UpdateID(num = it.id)
-                    CurrentID.Updatebool(x = false)
+                    bottomNavigation.isVisible =false
+                    ShowSaveAlert(clicked = it.id , current = CurrentID.getID())
                 } else if (CurrentID.getID() == ID_DAYPICKERFRAGMENT) {
-                    navController.navigate(R.id.action_dayPicker_to_settings)
-                    CurrentID.UpdateID(num = it.id)
-                    CurrentID.Updatebool(x = false)
+                    bottomNavigation.isVisible =false
+                    ShowSaveAlert(clicked = it.id , current = CurrentID.getID())
                 }
 
                 else -> navController.navigate(R.id.action_landingFragment_to_testFragment)
@@ -286,6 +276,41 @@ class Landing : AppCompatActivity() {
             }else if(clicked == ID_TESTFRAGMENT && current == ID_SEQUENCEFRAGMENT){
                 bottomNavigation.isVisible =true
                 navController.navigate(R.id.action_sequence_to_testFragment)
+                CurrentID.UpdateID(num = clicked)
+                CurrentID.Updatebool(x = false)
+            }else if(clicked == ID_TESTFRAGMENT && current == ID_DAYPICKERFRAGMENT){
+                bottomNavigation.isVisible = true
+                navController.navigate(R.id.action_dayPicker_to_testFragment)
+                CurrentID.UpdateID(num = clicked)
+                CurrentID.Updatebool(x = false)
+            }else if(clicked == ID_PROGRAMFRAGMENT && current == ID_SEQUENCEFRAGMENT){
+                bottomNavigation.isVisible = true
+                navController.navigate(R.id.action_sequence_to_programFragment)
+                CurrentID.UpdateID(num = clicked)
+                CurrentID.Updatebool(x = false)
+            }else if(clicked == ID_PROGRAMFRAGMENT && current == ID_DAYPICKERFRAGMENT){
+                bottomNavigation.isVisible = true
+                navController.navigate(R.id.action_dayPicker_to_programFragment)
+                CurrentID.UpdateID(num = clicked)
+                CurrentID.Updatebool(x = false)
+            }else if(clicked == ID_SCHEDULEFRAGMENT && current == ID_STEPFRAGMENT){
+                bottomNavigation.isVisible = true
+                navController.navigate(R.id.action_setStepFragment_to_scheduleFragment)
+                CurrentID.UpdateID(num = clicked)
+                CurrentID.Updatebool(x = false)
+            }else if(clicked == ID_SETTINGSFRAGMENT && current == ID_STEPFRAGMENT){
+                bottomNavigation.isVisible = true
+                navController.navigate(R.id.action_setStepFragment_to_settings)
+                CurrentID.UpdateID(num = clicked)
+                CurrentID.Updatebool(x = false)
+            }else if(clicked == ID_SETTINGSFRAGMENT && current == ID_SEQUENCEFRAGMENT){
+                bottomNavigation.isVisible = true
+                navController.navigate(R.id.action_sequence_to_settings)
+                CurrentID.UpdateID(num = clicked)
+                CurrentID.Updatebool(x = false)
+            }else if(clicked == ID_SETTINGSFRAGMENT && current == ID_DAYPICKERFRAGMENT){
+                bottomNavigation.isVisible = true
+                navController.navigate(R.id.action_dayPicker_to_settings)
                 CurrentID.UpdateID(num = clicked)
                 CurrentID.Updatebool(x = false)
             }

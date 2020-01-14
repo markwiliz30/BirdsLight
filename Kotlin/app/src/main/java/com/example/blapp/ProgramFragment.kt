@@ -93,7 +93,7 @@ class ProgramFragment : Fragment(){
                         object : MyButtonClickListener{
                             override fun onClick(pos: Int) {
                                 val step = StepItem(
-                                    
+
                                 )
 
 

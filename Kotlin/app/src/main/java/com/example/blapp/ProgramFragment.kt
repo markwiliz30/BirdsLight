@@ -8,12 +8,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.CurrentId.extensions.CurrentID
 import com.example.blapp.adapter.PgmAdapter
+import com.example.blapp.collection.PgmCollection
 import com.example.blapp.databasehelper.stepmanager
 import com.example.blapp.helper.MyButton
 import com.example.blapp.helper.MySwipeHelper
@@ -123,8 +125,19 @@ class ProgramFragment : Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
-        btnNewProgram.setOnClickListener{
-            navController.navigate(R.id.action_programFragment_to_setStepFragment)
+        btn_new_pgm.setOnClickListener{
+            var createdPgmIndex = 0
+            if(PgmCollection.pgmCollection == null)
+            {
+                createdPgmIndex = 1
+            }
+            else
+            {
+                createdPgmIndex = PgmCollection.pgmCollection!!.count() + 1
+            }
+
+            val bundle = bundleOf("parentPgmIndex" to  createdPgmIndex)
+            navController.navigate(R.id.action_programFragment_to_setStepFragment, bundle)
             CurrentID.UpdateID(num = 6)
             CurrentID.Updatebool(x = true)
         }

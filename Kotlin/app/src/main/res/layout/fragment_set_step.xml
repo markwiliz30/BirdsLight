@@ -40,7 +40,16 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Program-1"
+            android:text="Program-"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:textColor="#39405A"
+            />
+        <TextView
+            android:id="@+id/step_parent_pgm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00"
             android:textStyle="bold"
             android:textSize="20dp"
             android:textColor="#39405A"
@@ -68,7 +77,7 @@
             />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/btnDecVal"
+            android:id="@+id/btn_dec_step"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
@@ -77,7 +86,7 @@
             app:fabSize="mini"/>
 
         <EditText
-            android:id="@+id/update_step"
+            android:id="@+id/txt_step_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:maxLength="99"
@@ -88,7 +97,7 @@
 
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/btnIncVal"
+            android:id="@+id/btn_inc_step"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -98,7 +107,7 @@
             app:backgroundTint="#39405A" />
 
         <Button
-            android:id="@+id/btnAddStep"
+            android:id="@+id/btn_add_step"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_weight="1"
@@ -249,7 +258,7 @@
             />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingActionButton4"
+            android:id="@+id/btn_dec_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
@@ -258,7 +267,7 @@
             app:fabSize="mini"/>
 
         <EditText
-            android:id="@+id/update_time"
+            android:id="@+id/txt_step_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:maxLength="99"
@@ -269,7 +278,7 @@
 
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingActionButton3"
+            android:id="@+id/btn_inc_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -287,7 +296,7 @@
         android:orientation="horizontal"
         android:layout_marginBottom="20dp">
         <Button
-            android:id="@+id/btnSaveStep"
+            android:id="@+id/btn_step_save"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_weight="1"

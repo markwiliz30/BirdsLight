@@ -32,7 +32,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btnNewProgram"
+            android:id="@+id/btn_new_pgm"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"

@@ -32,7 +32,6 @@ class DayPicker : Fragment() {
         btnCancelDayPicker.setOnClickListener{
             navController.navigate(R.id.action_dayPicker_to_sequence)
         }
-
     }
 
 }

@@ -102,13 +102,13 @@
 
 
 
-                <SeekBar
-                    android:id="@+id/sbPan"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_weight="1"
-                    />
+            <SeekBar
+                android:id="@+id/test_pan_sb"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="10dp"
+                android:max="255"/>
 
 
             <LinearLayout
@@ -144,13 +144,13 @@
             </LinearLayout>
 
 
-                <SeekBar
-                    android:id="@+id/sbTilt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginHorizontal="10dp"
-                    />
+            <SeekBar
+                android:id="@+id/test_tilt_sb"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="10dp"
+                android:max="255"/>
 
 
 
@@ -188,13 +188,13 @@
 
 
 
-                <SeekBar
-                    android:id="@+id/sbBlink"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginHorizontal="10dp"
-                    />
+            <SeekBar
+                android:id="@+id/test_blink_sb"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="10dp"
+                android:max="255"/>
 
 
     <Button

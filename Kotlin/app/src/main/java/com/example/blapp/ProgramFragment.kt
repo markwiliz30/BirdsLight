@@ -34,7 +34,7 @@ class ProgramFragment : Fragment(){
     internal lateinit var db_step:stepmanager
     internal var lststep: List<StepItem> = ArrayList<StepItem>()
 
-
+    internal val itemList = ArrayList<PgmItem>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -66,7 +66,8 @@ class ProgramFragment : Fragment(){
                         Color.parseColor("#14BED1"),
                         object : MyButtonClickListener{
                             override fun onClick(pos: Int) {
-                                Toast.makeText(activity, "DELETE ID"+pos, Toast.LENGTH_SHORT).show()
+                                PgmCollection.pgmCollection.removeAt(pos)
+                                generateItem()
                             }
                         }
                     )
@@ -80,7 +81,10 @@ class ProgramFragment : Fragment(){
                         Color.parseColor("#14BED1"),
                         object : MyButtonClickListener{
                             override fun onClick(pos: Int) {
-                                Toast.makeText(activity, "UPDATE ID"+pos, Toast.LENGTH_SHORT).show()
+                                val bundle = bundleOf("parentPgmIndex" to  pos + 1)
+                                navController.navigate(R.id.action_programFragment_to_setStepFragment, bundle )
+                                CurrentID.UpdateID(num = 6)
+                                CurrentID.Updatebool(x = true)
                             }
                         }
                     )
@@ -97,8 +101,6 @@ class ProgramFragment : Fragment(){
                                 val step = StepItem(
 
                                 )
-
-
                             }
                         }
                     )
@@ -110,18 +112,19 @@ class ProgramFragment : Fragment(){
     }
 
     private fun generateItem() {
-        val itemList = ArrayList<PgmItem>()
-        var i =0
-        while (i<50)
-        {
-            var pgmNum = ++i
-          itemList.add(PgmItem())
-            i++
+
+        for(item in PgmCollection.pgmCollection){
+            itemList.add(item)
         }
         adapter = PgmAdapter(activity, itemList)
         recycler_pgm.adapter = adapter
     }
 
+    private fun RefreshList(){
+        itemList.clear()
+        adapter = PgmAdapter(activity, itemList)
+        recycler_pgm.adapter = adapter
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)

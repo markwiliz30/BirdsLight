@@ -250,4 +250,14 @@
             app:exitAnim="@anim/slide_up"
             app:enterAnim="@anim/slide_down"/>
     </fragment>
+    <fragment
+        android:id="@+id/programList"
+        android:name="com.example.blapp.ProgramList"
+        android:label="ProgramList" >
+        <action
+            android:id="@+id/action_programList_to_setStepFragment"
+            app:destination="@id/setStepFragment"
+            app:exitAnim="@anim/slide_up"
+            app:enterAnim="@anim/slide_down"/>
+    </fragment>
 </navigation>

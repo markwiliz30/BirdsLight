@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.blapp.R
+import com.example.blapp.collection.PgmCollection
 import com.example.blapp.model.PgmItem
 
 

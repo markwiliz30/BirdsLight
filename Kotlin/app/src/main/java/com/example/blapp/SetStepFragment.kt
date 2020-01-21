@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.SeekBar
+import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentController
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -20,6 +21,8 @@ import com.example.blapp.model.PgmItem
 import com.example.blapp.model.StepItem
 import kotlinx.android.synthetic.main.fragment_program.*
 import kotlinx.android.synthetic.main.fragment_set_step.*
+import com.example.blapp.ProgramFragment
+
 
 /**
  * A simple [Fragment] subclass.
@@ -40,6 +43,7 @@ class SetStepFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         parentPgmIndex = arguments!!.getInt("parentPgmIndex")
+
         stepIndex = 1
         return inflater.inflate(R.layout.fragment_set_step, container, false)
     }
@@ -49,6 +53,11 @@ class SetStepFragment : Fragment() {
         navController = Navigation.findNavController(view)
         val command: Byte = 0x02
         var data: ByteArray
+
+        if(PgmCollection.pgmCollection.count() >= parentPgmIndex){
+            FindCurrentStepOnPgmCollection(parentPgmIndex)
+        }
+
 
         step_parent_pgm.text = parentPgmIndex.toString()
         txt_step_time.setText(tmVal.toString())
@@ -236,6 +245,26 @@ class SetStepFragment : Fragment() {
         edit_blink_sb.progress = bVal
         txt_step_time.setText(tmVal.toString())
     }
+
+    private fun FindCurrentStepOnPgmCollection(index: Int){
+
+            val newCurrentitems = StepCollection.stepCollection.filter { it.pgm == index.toByte()}
+            for (item in newCurrentitems){
+                tempStepList.add(item)
+            }
+
+            pVal = newCurrentitems[0]!!.pan!!.toUByte().toInt()
+            tVal = newCurrentitems[0]!!.tilt!!.toUByte().toInt()
+            bVal = newCurrentitems[0]!!.blink!!.toUByte().toInt()
+            tmVal = newCurrentitems[0]!!.time!!.toUByte().toInt()
+
+            edit_pan_sb.progress = pVal
+            edit_tilt_sb.progress = tVal
+            edit_blink_sb.progress = bVal
+            txt_step_time.setText(tmVal.toString())
+    }
+
+
 
     private fun ResetCurrentStep()
     {

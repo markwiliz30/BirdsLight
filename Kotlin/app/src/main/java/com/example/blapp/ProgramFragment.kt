@@ -67,7 +67,7 @@ class ProgramFragment : Fragment(){
                         object : MyButtonClickListener{
                             override fun onClick(pos: Int) {
                                 PgmCollection.pgmCollection.removeAt(pos)
-                                generateItem()
+                                RefreshList()
                             }
                         }
                     )
@@ -122,6 +122,9 @@ class ProgramFragment : Fragment(){
 
     private fun RefreshList(){
         itemList.clear()
+        for(item in PgmCollection.pgmCollection){
+            itemList.add(item)
+        }
         adapter = PgmAdapter(activity, itemList)
         recycler_pgm.adapter = adapter
     }

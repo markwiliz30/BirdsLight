@@ -180,9 +180,12 @@ class SetStepFragment : Fragment() {
             stepIndex++
             if((stepIndex-2) < tempStepList.count())
             {
-                AddStep(stepIndex -1)
-                SetCurrentStepValues(stepIndex)
-                txt_step_num.setText(stepIndex.toString())
+
+                    AddStep(stepIndex -1)
+                    SetCurrentStepValues(stepIndex)
+                    txt_step_num.setText(stepIndex.toString())
+
+
             }
             else
             {
@@ -252,6 +255,8 @@ class SetStepFragment : Fragment() {
             for (item in newCurrentitems){
                 tempStepList.add(item)
             }
+        val newCurrentitem = tempStepList.find { it.step == index.toByte() }
+        tempStepList.remove(newCurrentitem)
 
             pVal = newCurrentitems[0]!!.pan!!.toUByte().toInt()
             tVal = newCurrentitems[0]!!.tilt!!.toUByte().toInt()

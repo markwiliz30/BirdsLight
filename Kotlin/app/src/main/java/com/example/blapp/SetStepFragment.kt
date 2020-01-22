@@ -9,6 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.SeekBar
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentController
 import androidx.navigation.NavController
@@ -22,6 +24,7 @@ import com.example.blapp.model.StepItem
 import kotlinx.android.synthetic.main.fragment_program.*
 import kotlinx.android.synthetic.main.fragment_set_step.*
 import com.example.blapp.ProgramFragment
+import kotlinx.android.synthetic.main.activity_landing.*
 
 
 /**
@@ -255,7 +258,7 @@ class SetStepFragment : Fragment() {
             for (item in newCurrentitems){
                 tempStepList.add(item)
             }
-        val newCurrentitem = tempStepList.find { it.step == index.toByte() }
+        val newCurrentitem = tempStepList.find { it.step == stepIndex.toByte() }
         tempStepList.remove(newCurrentitem)
 
             pVal = newCurrentitems[0]!!.pan!!.toUByte().toInt()
@@ -296,4 +299,6 @@ class SetStepFragment : Fragment() {
         newItem.time = tmVal.toByte()
         tempStepList.add(newItem)
     }
+
+
 }

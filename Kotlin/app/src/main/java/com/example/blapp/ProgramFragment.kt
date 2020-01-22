@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.os.bundleOf
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -66,8 +67,8 @@ class ProgramFragment : Fragment(){
                         Color.parseColor("#14BED1"),
                         object : MyButtonClickListener{
                             override fun onClick(pos: Int) {
-                                PgmCollection.pgmCollection.removeAt(pos)
-                                RefreshList()
+                                DeleteAlert(pos)
+
                             }
                         }
                     )
@@ -147,5 +148,20 @@ class ProgramFragment : Fragment(){
             CurrentID.UpdateID(num = 6)
             CurrentID.Updatebool(x = true)
         }
+    }
+    private fun DeleteAlert(pos: Int){
+        val mAlertDialog = AlertDialog.Builder(activity!!)
+        mAlertDialog.setIcon(R.mipmap.ic_launcher_round) //set alertdialog icon
+        mAlertDialog.setTitle("Title!") //set alertdialog title
+        mAlertDialog.setMessage("Your message here") //set alertdialog message
+        mAlertDialog.setPositiveButton("Yes") { dialog, id ->
+            PgmCollection.pgmCollection.removeAt(pos)
+            RefreshList()
+            //Toast.makeText(activity!!, "Yes", Toast.LENGTH_SHORT).show()
+        }
+        mAlertDialog.setNegativeButton("No") { dialog, id ->
+            Toast.makeText(activity!!, "No", Toast.LENGTH_SHORT).show()
+        }
+        mAlertDialog.show()
     }
 }

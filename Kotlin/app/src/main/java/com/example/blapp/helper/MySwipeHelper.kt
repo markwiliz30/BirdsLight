@@ -13,6 +13,7 @@ import androidx.appcompat.view.menu.MenuView
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.example.blapp.collection.PgmCollection
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
@@ -40,7 +41,16 @@ abstract class MySwipeHelper(context: FragmentActivity?, private val recyclerVie
     }
 
     private val onTouchListener = View.OnTouchListener{_,motionEvent ->
-        if(swipePosition < 0) return@OnTouchListener false
+        if (swipePosition > PgmCollection.pgmCollection.count() -1)
+        {
+            swipePosition = PgmCollection.pgmCollection.count() -1
+        }
+
+        if(swipePosition < 0)
+        {
+            return@OnTouchListener false
+        }
+
         val point = Point(motionEvent.rawX.toInt(), motionEvent.rawY.toInt())
         val swipeViewHolder = recyclerView.findViewHolderForAdapterPosition(swipePosition)
         val swipedItem = swipeViewHolder!!.itemView

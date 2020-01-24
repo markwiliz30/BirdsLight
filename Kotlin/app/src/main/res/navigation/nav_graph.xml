@@ -86,6 +86,11 @@
             app:destination="@id/setStepFragment"
             app:exitAnim="@anim/slide_up"
             app:enterAnim="@anim/slide_down"/>
+        <action
+            android:id="@+id/action_programFragment_to_importFragment"
+            app:destination="@id/importFragment"
+            app:exitAnim="@anim/slide_up"
+            app:enterAnim="@anim/slide_down"/>
     </fragment>
     <fragment
         android:id="@+id/scheduleFragment"
@@ -257,6 +262,46 @@
         <action
             android:id="@+id/action_programList_to_setStepFragment"
             app:destination="@id/setStepFragment"
+            app:exitAnim="@anim/slide_up"
+            app:enterAnim="@anim/slide_down"/>
+        <action
+            android:id="@+id/action_programList_to_importFragment"
+            app:destination="@id/importFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/importFragment"
+        android:name="com.example.blapp.ImportFragment"
+        android:label="fragment_import"
+        tools:layout="@layout/fragment_import" >
+        <action
+            android:id="@+id/action_importFragment_to_programList"
+            app:destination="@id/programList"
+            app:exitAnim="@anim/slide_up"
+            app:enterAnim="@anim/slide_down"
+            />
+        <action
+            android:id="@+id/action_importFragment_to_programFragment"
+            app:destination="@id/programFragment"
+            app:exitAnim="@anim/slide_up"
+            app:enterAnim="@anim/slide_down"/>
+        <action
+            android:id="@+id/action_importFragment_to_testFragment"
+            app:destination="@id/testFragment"
+            app:exitAnim="@anim/slide_up"
+            app:enterAnim="@anim/slide_down"/>
+        <action
+            android:id="@+id/action_importFragment_to_landingFragment"
+            app:destination="@id/landingFragment"
+            app:exitAnim="@anim/slide_up"
+            app:enterAnim="@anim/slide_down"/>
+        <action
+            android:id="@+id/action_importFragment_to_settings"
+            app:destination="@id/settings"
+            app:exitAnim="@anim/slide_up"
+            app:enterAnim="@anim/slide_down"/>
+        <action
+            android:id="@+id/action_importFragment_to_scheduleFragment"
+            app:destination="@id/scheduleFragment"
             app:exitAnim="@anim/slide_up"
             app:enterAnim="@anim/slide_down"/>
     </fragment>

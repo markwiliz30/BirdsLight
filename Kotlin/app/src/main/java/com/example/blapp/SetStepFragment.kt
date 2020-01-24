@@ -39,6 +39,8 @@ class SetStepFragment : Fragment() {
     internal var tVal:Int = 0
     internal var bVal:Int = 0
     internal var tmVal: Int = 0
+    internal var editClicked: Boolean = false
+    internal var tempDelete: Int =0
     var tempStepList: MutableList<StepItem> = mutableListOf()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,7 +60,15 @@ class SetStepFragment : Fragment() {
         var data: ByteArray
 
         if(PgmCollection.pgmCollection.count() >= parentPgmIndex){
+            editClicked= true
             FindCurrentStepOnPgmCollection(parentPgmIndex)
+
+        }
+
+        if(editClicked){
+            btn_step_save.text= "Update"
+        }else{
+            btn_step_save.text="Save"
         }
 
 
@@ -183,12 +193,9 @@ class SetStepFragment : Fragment() {
             stepIndex++
             if((stepIndex-2) < tempStepList.count())
             {
-
                     AddStep(stepIndex -1)
                     SetCurrentStepValues(stepIndex)
                     txt_step_num.setText(stepIndex.toString())
-
-
             }
             else
             {
@@ -208,6 +215,21 @@ class SetStepFragment : Fragment() {
                 txt_step_num.setText(stepIndex.toString())
             }
         }
+        btnDeleteStep.setOnClickListener{
+            if(tempStepList.count() == 0){
+                Toast.makeText(activity!!, "ALI KA PWEDENG MAG DELETE NUNG METUNG KAMU STEP MAMUSENG", Toast.LENGTH_SHORT).show()
+            }else{
+                AdjustIndex(stepIndex)
+                if(stepIndex == 1){
+                    SetCurrentStepValues(stepIndex)
+                    txt_step_num.setText(stepIndex.toString())
+                }else{
+                    stepIndex--
+                    SetCurrentStepValues(stepIndex)
+                    txt_step_num.setText(stepIndex.toString())
+                }
+            }
+        }
 
         btn_add_step.setOnClickListener{
             AddStep(stepIndex)
@@ -217,13 +239,24 @@ class SetStepFragment : Fragment() {
         }
 
         btn_step_save.setOnClickListener{
-            var createdPgm = PgmItem()
-            val createdPgmCommand = 0x03
-            createdPgm.command = createdPgmCommand.toByte()
-            createdPgm.pgm = parentPgmIndex.toByte()
-            AddStep(stepIndex)
-            AddPgmToCollection(createdPgm, tempStepList)
-            navController.navigate(R.id.action_setStepFragment_to_programFragment)
+            if(editClicked){
+                AddStep(stepIndex)
+                UpdatePgmAtCollection(parentPgmIndex, tempStepList)
+                Toast.makeText(activity!!, "Update Success!", Toast.LENGTH_SHORT).show()
+                editClicked = false
+                navController.navigate(R.id.action_setStepFragment_to_programFragment)
+
+            }else{
+                var createdPgm = PgmItem()
+                val createdPgmCommand = 0x03
+                createdPgm.command = createdPgmCommand.toByte()
+                createdPgm.pgm = parentPgmIndex.toByte()
+                AddStep(stepIndex)
+                AddPgmToCollection(createdPgm, tempStepList)
+                navController.navigate(R.id.action_setStepFragment_to_programFragment)
+            }
+
+
         }
     }
 
@@ -235,6 +268,19 @@ class SetStepFragment : Fragment() {
         }
 
         PgmCollection.pgmCollection!!.add(pgm)
+    }
+
+    private fun UpdatePgmAtCollection(pgm: Int, stepList: List<StepItem>){
+
+        do{
+            var found = StepCollection.stepCollection.find{it.pgm == pgm.toByte()}
+            StepCollection.stepCollection.remove(found)
+        }while(found != null)
+
+        for(item in stepList){
+            StepCollection.stepCollection!!.add(item)
+        }
+
     }
 
     private fun SetCurrentStepValues(index: Int)
@@ -261,10 +307,11 @@ class SetStepFragment : Fragment() {
         val newCurrentitem = tempStepList.find { it.step == stepIndex.toByte() }
         tempStepList.remove(newCurrentitem)
 
-            pVal = newCurrentitems[0]!!.pan!!.toUByte().toInt()
-            tVal = newCurrentitems[0]!!.tilt!!.toUByte().toInt()
-            bVal = newCurrentitems[0]!!.blink!!.toUByte().toInt()
-            tmVal = newCurrentitems[0]!!.time!!.toUByte().toInt()
+
+            pVal = newCurrentitem!!.pan!!.toUByte().toInt()
+            tVal = newCurrentitem!!.tilt!!.toUByte().toInt()
+            bVal = newCurrentitem!!.blink!!.toUByte().toInt()
+            tmVal = newCurrentitem!!.time!!.toUByte().toInt()
 
             edit_pan_sb.progress = pVal
             edit_tilt_sb.progress = tVal
@@ -296,6 +343,13 @@ class SetStepFragment : Fragment() {
         newItem.blink = bVal.toByte()
         newItem.time = tmVal.toByte()
         tempStepList.add(newItem)
+    }
+
+    private fun AdjustIndex(index: Int){
+        var ToAdjust = tempStepList.filter { it.step!! > index.toByte() }
+        for(adjust in ToAdjust){
+            adjust.step = adjust.step!!.dec()
+        }
     }
 
 

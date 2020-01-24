@@ -17,12 +17,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.CurrentId.extensions.CurrentID
 import com.example.blapp.adapter.PgmAdapter
 import com.example.blapp.collection.PgmCollection
-import com.example.blapp.databasehelper.stepmanager
+import com.example.blapp.collection.StepCollection
+import com.example.blapp.databasehelper.pgmmanager
+import com.example.blapp.databasehelper.DBmanager
 import com.example.blapp.helper.MyButton
 import com.example.blapp.helper.MySwipeHelper
 import com.example.blapp.listener.MyButtonClickListener
 import com.example.blapp.model.PgmItem
 import com.example.blapp.model.StepItem
+import kotlinx.android.synthetic.main.fragment_input_dialog.*
+import kotlinx.android.synthetic.main.fragment_input_dialog.view.*
 import kotlinx.android.synthetic.main.fragment_program.*
 
 class ProgramFragment : Fragment(){
@@ -32,20 +36,25 @@ class ProgramFragment : Fragment(){
 
     lateinit var adapter: PgmAdapter
 
-    internal lateinit var db_step:stepmanager
-    internal var lststep: List<StepItem> = ArrayList<StepItem>()
+   // internal lateinit var dbStep:DBmanager
+    internal lateinit var dbPgm:DBmanager
+    internal var lstStep: List<StepItem> = ArrayList<StepItem>()
+    internal var lstPgm: List<PgmItem> = ArrayList<PgmItem>()
 
-    internal val itemList = ArrayList<PgmItem>()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_program, container, false)
-        db_step = stepmanager(activity)
+
+
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+       // dbStep = DBmanager(activity!!)
+        dbPgm = DBmanager(activity!!)
 
         recycler_pgm.setHasFixedSize(true)
         recycler_pgm.setItemViewCacheSize(25)
@@ -98,9 +107,12 @@ class ProgramFragment : Fragment(){
                         Color.parseColor("#14BED1"),
                         object : MyButtonClickListener{
                             override fun onClick(pos: Int) {
-                                val step = StepItem(
+                                //dbStep.eyy()
+                                dbPgm.eyy()
+                               // showCreateCategoryDialog(pos+1)
+                               //var test = dbPgm.allpgm
+                                //var test2 = dbStep.allStep
 
-                                )
                             }
                         }
                     )
@@ -112,21 +124,27 @@ class ProgramFragment : Fragment(){
     }
 
     private fun generateItem() {
-
-        for(item in PgmCollection.pgmCollection){
-            itemList.add(item)
-        }
-        adapter = PgmAdapter(activity, itemList)
+        adapter = PgmAdapter(activity, PgmCollection.pgmCollection)
         recycler_pgm.adapter = adapter
     }
 
-    private fun RefreshList(){
-        itemList.clear()
-        for(item in PgmCollection.pgmCollection){
-            itemList.add(item)
+    private fun SynchronizePgmCollection(){
+        var pgmCollectionIndex = 1
+        for(item in PgmCollection.pgmCollection)
+        {
+            item.pgm = pgmCollectionIndex.toByte()
+            pgmCollectionIndex++
         }
-        adapter = PgmAdapter(activity, itemList)
+
+        adapter = PgmAdapter(activity, PgmCollection.pgmCollection)
         recycler_pgm.adapter = adapter
+
+//        itemList.clear()
+//        for(item in PgmCollection.pgmCollection){
+//            itemList.add(item)
+//        }
+//        adapter = PgmAdapter(activity, itemList)
+//        recycler_pgm.adapter = adapter
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -147,6 +165,11 @@ class ProgramFragment : Fragment(){
             CurrentID.UpdateID(num = 6)
             CurrentID.Updatebool(x = true)
         }
+        btnImportFragment.setOnClickListener{
+            navController.navigate(R.id.action_programFragment_to_importFragment)
+            CurrentID.UpdateID(num = 9)
+            CurrentID.Updatebool(x = true)
+        }
     }
     private fun DeleteAlert(pos: Int){
         val mAlertDialog = AlertDialog.Builder(activity!!)
@@ -154,8 +177,10 @@ class ProgramFragment : Fragment(){
         mAlertDialog.setTitle("Title!") //set alertdialog title
         mAlertDialog.setMessage("Your message here") //set alertdialog message
         mAlertDialog.setPositiveButton("Yes") { dialog, id ->
+            val pgmIndex = PgmCollection.pgmCollection.get(pos)
+            RefreshStepCollection(pgmIndex.pgm!!.toInt())
             PgmCollection.pgmCollection.removeAt(pos)
-            RefreshList()
+            SynchronizePgmCollection()
             //Toast.makeText(activity!!, "Yes", Toast.LENGTH_SHORT).show()
         }
         mAlertDialog.setNegativeButton("No") { dialog, id ->
@@ -163,4 +188,81 @@ class ProgramFragment : Fragment(){
         }
         mAlertDialog.show()
     }
+
+    private fun SaveName(name: String){
+
+    }
+
+    private fun RefreshStepCollection(pgm: Int)
+    {
+        do{
+            val retreivedStep = StepCollection.stepCollection.find { it.pgm!!.toInt() == pgm }
+            StepCollection.stepCollection.remove(retreivedStep)
+
+        }while (retreivedStep != null)
+
+        for(item in StepCollection.stepCollection)
+        {
+            if(item.pgm!!.toInt() > pgm)
+            {
+                val newPgm = item.pgm!!.toInt() -1
+                item.pgm = newPgm.toByte()
+            }
+        }
+    }
+
+    private fun AddPgmDb(pgm: Int){
+
+
+    }
+
+    fun showCreateCategoryDialog(pgm: Int) {
+
+        val editAlert = AlertDialog.Builder(activity!!).create()
+
+        val editView = layoutInflater.inflate(R.layout.fragment_input_dialog, null)
+
+        editAlert.setView(editView)
+        editAlert.show()
+
+        editView.input_save.setOnClickListener{
+            val textName = editAlert.name_input.text
+
+            var pgmAdd = PgmCollection.pgmCollection.find { it.pgm == pgm.toByte() }
+            var pgmNameCheck = dbPgm.allpgm.find { it.name == textName.toString() }
+
+
+
+            if (pgmAdd != null) {
+                when {
+                    textName.isEmpty() -> {
+                        editView.name_input.setBackgroundResource(R.drawable.redborder)
+                        Toast.makeText(activity!!, "Please fill required field!" , Toast.LENGTH_LONG).show()
+                    }
+                    pgmNameCheck!= null -> {
+                        editView.name_input.setBackgroundResource(R.drawable.redborder)
+                        Toast.makeText(activity!!, "Name Already Taken!" , Toast.LENGTH_LONG).show()
+                    }
+                    else -> {
+                        pgmAdd.name = textName.toString()
+                        do{
+                            var stepAdd = StepCollection.stepCollection.find { it.pgm == pgm.toByte() }
+                            stepAdd!!.pgm_name = textName.toString()
+                            dbPgm.addStep(stepAdd)
+                        }while(stepAdd != null)
+
+                        dbPgm.addPgm(pgmAdd)
+                        editAlert.dismiss()
+                        Toast.makeText(activity!!, "Save Success!" , Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+        }
+
+        editView.input_cancel.setOnClickListener{
+            editAlert.dismiss()
+            Toast.makeText(activity!!, "Save Canceled!" , Toast.LENGTH_LONG).show()
+        }
+    }
+
 }

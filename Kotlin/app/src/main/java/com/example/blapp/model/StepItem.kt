@@ -9,7 +9,7 @@ class StepItem {
     var tilt: Byte? = 0
     var blink: Byte? = 0
     var time: Byte? = 0
-
+    var pgm_name: String? = ""
     //Getter
     get() = field
     //Setter

@@ -7,9 +7,10 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import androidx.fragment.app.FragmentActivity
 import com.example.blapp.ProgramFragment
+import com.example.blapp.model.PgmItem
 import com.example.blapp.model.StepItem
 
-class stepmanager(context: FragmentActivity?):SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VER) {
+class DBmanager(context: Context):SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VER) {
     companion object{
         const val DATABASE_NAME = "BIRDLIGHT.db"
         const val DATABASE_VER = 1
@@ -22,8 +23,12 @@ class stepmanager(context: FragmentActivity?):SQLiteOpenHelper(context, DATABASE
         const val STEP_TILT = "STEP_TILT"
         const val STEP_BLINK = "STEP_BLINK"
         const val STEP_TIME = "STEP_TIME"
-        const val STEP_PGM = "STEP_PGM"
+        const val STEP_PGM_NAME = "STEP_PGM_NAME"
 
+        const val PROGRAM_TABLE = "TABLE_PROGRAM"
+        const val PROGRAM_ID = "PROGRAM_ID"
+        const val PROGRAM_COMMAND = "PROGRAM_COMMAND"
+        const val PROGRAM_NAME = "PROGRAM_NAME"
 
         const val SEQUENCE_TABLE = "TABLE_SEQUENCE"
         const val SEQUENCE_ID = "SEQUENCE_ID"
@@ -63,27 +68,25 @@ class stepmanager(context: FragmentActivity?):SQLiteOpenHelper(context, DATABASE
 
     }
     override fun onCreate(db: SQLiteDatabase?) {
-        db!!.execSQL(("CREATE TABLE $STEP_TABLE ($STEP_ID INTEGER PRIMARY KEY AUTOINCREMENT, $STEP_COMMAND BYTE, $STEP_STEP BYTE, $STEP_PAN BYTE,$STEP_TILT BYTE , $STEP_BLINK BYTE , $STEP_TIME BYTE , $STEP_PGM BYTE)"))
-
-        db!!.execSQL(("CREATE TABLE $SEQUENCE_TABLE ($SEQUENCE_ID INTEGER PRIMARY KEY AUTOINCREMENT, $SEQUENCE_COMMAND BYTE , $SEQUENCE_SQN BYTE , $SEQUENCE_SHOUR BYTE,$SEQUENCE_SMINUTE BYTE, $SEQUENCE_EHOUR BYTE , $SEQUENCE_EMINUTE BYTE, $SEQUENCE_NAME TEXT)"))
-        db!!.execSQL(("CREATE TABLE $SEQ_PROGRAM_TABLE ($SEQ_PROGRAM_ID PRIMARY KEY AUTOINCREMENT , $SEQ_PROGRAM_COMMAND BYTE , $SEQ_PROGRAM_SQN BYTE , $SEQ_PROGRAM_ORDER BYTE , $SEQ_PROGRAM_PGM BYTE , $SEQ_PROGRAM_DURATION BYTE)"))
-        db!!.execSQL(("CREATE TABLE $SETUP_TABLE ($SETUP_ID INTEGER PRIMARY KEY AUTOINCREMENT , $SETUP_COMMAND BYTE, SETUP_STP BYTE , $SETUP_SMONTH BYTE , $SETUP_SDAY BYTE , $SETUP_EMONTH BYTE, $SETUP_EDAY BYTE , $SETUP_NAME TEXT)"))
-        db!!.execSQL(("CREATE TABLE $SETUP_SEQ_TABLE ($SETUP_SEQ_ID INTEGER PRIMARY KEY AUTOINCREMENT , $SETUP_SEQ_COMMAND BYTE , $SETUP_SEQ_STP BYTE , $SETUP_SEQ_SQN BYTE , $SETUP_SEQ_DAY BYTE)"))
+        db!!.execSQL(("CREATE TABLE $STEP_TABLE ($STEP_ID INTEGER PRIMARY KEY AUTOINCREMENT, $STEP_COMMAND BYTE, $STEP_STEP BYTE, $STEP_PAN BYTE,$STEP_TILT BYTE , $STEP_BLINK BYTE , $STEP_TIME BYTE , $STEP_PGM_NAME TEXT)"))
+        db!!.execSQL(("CREATE TABLE $PROGRAM_TABLE ($PROGRAM_ID INTEGER PRIMARY KEY AUTOINCREMENT , $PROGRAM_COMMAND BYTE, $PROGRAM_NAME TEXT)"))
+//        db!!.execSQL(("CREATE TABLE $SEQUENCE_TABLE ($SEQUENCE_ID INTEGER PRIMARY KEY AUTOINCREMENT, $SEQUENCE_COMMAND BYTE , $SEQUENCE_SQN BYTE , $SEQUENCE_SHOUR BYTE,$SEQUENCE_SMINUTE BYTE, $SEQUENCE_EHOUR BYTE , $SEQUENCE_EMINUTE BYTE, $SEQUENCE_NAME TEXT)"))
+//        db!!.execSQL(("CREATE TABLE $SEQ_PROGRAM_TABLE ($SEQ_PROGRAM_ID PRIMARY KEY AUTOINCREMENT , $SEQ_PROGRAM_COMMAND BYTE , $SEQ_PROGRAM_SQN BYTE , $SEQ_PROGRAM_ORDER BYTE , $SEQ_PROGRAM_PGM BYTE , $SEQ_PROGRAM_DURATION BYTE)"))
+//        db!!.execSQL(("CREATE TABLE $SETUP_TABLE ($SETUP_ID INTEGER PRIMARY KEY AUTOINCREMENT , $SETUP_COMMAND BYTE, SETUP_STP BYTE , $SETUP_SMONTH BYTE , $SETUP_SDAY BYTE , $SETUP_EMONTH BYTE, $SETUP_EDAY BYTE , $SETUP_NAME TEXT)"))
+//        db!!.execSQL(("CREATE TABLE $SETUP_SEQ_TABLE ($SETUP_SEQ_ID INTEGER PRIMARY KEY AUTOINCREMENT , $SETUP_SEQ_COMMAND BYTE , $SETUP_SEQ_STP BYTE , $SETUP_SEQ_SQN BYTE , $SETUP_SEQ_DAY BYTE)"))
 
 
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, p1: Int, p2: Int) {
-        db!!.execSQL("DROP TABLE IF EXISTS " + STEP_TABLE)
 
-        db.execSQL("DROP TABLE IF EXISTS " + SEQUENCE_TABLE)
-        db.execSQL("DROP TABLE IF EXISTS " + SEQ_PROGRAM_TABLE)
-        db.execSQL("DROP TABLE IF EXISTS " + SETUP_TABLE)
-        db.execSQL("DROP TABLE IF EXISTS " + SETUP_SEQ_TABLE)
-        onCreate(db)
     }
 
-
+    fun eyy(){
+        val db: SQLiteDatabase = this.writableDatabase
+        db!!.execSQL(("CREATE TABLE $STEP_TABLE ($STEP_ID INTEGER PRIMARY KEY AUTOINCREMENT, $STEP_COMMAND BYTE, $STEP_STEP BYTE, $STEP_PAN BYTE,$STEP_TILT BYTE , $STEP_BLINK BYTE , $STEP_TIME BYTE , $STEP_PGM_NAME TEXT)"))
+        db!!.execSQL("DROP TABLE IF EXISTS " + PROGRAM_TABLE)
+    }
     val allStep:List<StepItem>
 
         get(){
@@ -95,7 +98,7 @@ class stepmanager(context: FragmentActivity?):SQLiteOpenHelper(context, DATABASE
                 do{
                     val step = StepItem()
                     step.step_id = cursor.getInt(cursor.getColumnIndex(STEP_ID.toString())).toByte()
-                    step.pgm = cursor.getInt(cursor.getColumnIndex(STEP_PGM.toString())).toByte()
+                    step.pgm_name = cursor.getString(cursor.getColumnIndex(STEP_PGM_NAME.toString()))
                     step.step = cursor.getInt(cursor.getColumnIndex(STEP_STEP.toString())).toByte()
                     step.pan = cursor.getInt(cursor.getColumnIndex(STEP_PAN.toString())).toByte()
                     step.tilt = cursor.getInt(cursor.getColumnIndex(STEP_TILT.toString())).toByte()
@@ -115,7 +118,7 @@ class stepmanager(context: FragmentActivity?):SQLiteOpenHelper(context, DATABASE
     fun addStep(step:StepItem){
         val db:SQLiteDatabase = this.writableDatabase
         val values = ContentValues()
-        values.put(STEP_PGM,step.pgm)
+        values.put(STEP_PGM_NAME,step.pgm_name)
         values.put(STEP_STEP, step.step)
         values.put(STEP_PAN, step.pan)
         values.put(STEP_TILT, step.tilt)
@@ -130,21 +133,77 @@ class stepmanager(context: FragmentActivity?):SQLiteOpenHelper(context, DATABASE
     fun updateStep(step: StepItem): Int {
         val db:SQLiteDatabase = this.writableDatabase
         val values = ContentValues()
-        values.put(STEP_PGM,step.pgm)
+        values.put(STEP_PGM_NAME,step.pgm_name)
         values.put(STEP_STEP, step.step)
         values.put(STEP_PAN, step.pan)
         values.put(STEP_TILT, step.tilt)
         values.put(STEP_BLINK, step.blink)
         values.put(STEP_TIME, step.time)
 
-        return db.update(STEP_TABLE , values , "$STEP_ID =" , arrayOf(step.step_id.toString()))
+        return db.update(STEP_TABLE , values , "$STEP_PGM_NAME =" , arrayOf(step.pgm_name.toString()))
         db.close()
     }
 
     fun deleteStep(step: StepItem){
         val db:SQLiteDatabase = this.writableDatabase
 
-        db.delete(STEP_TABLE , "$STEP_ID = ?" , arrayOf(step.step_id.toString()))
+        db.delete(STEP_TABLE , "$STEP_PGM_NAME = ?" , arrayOf(step.pgm_name.toString()))
         db.close()
+    }
+
+    val allpgm:List<PgmItem>
+
+        get() {
+            val lstpgm = ArrayList<PgmItem>()
+            val selectQuery = "SELECT * FROM $PROGRAM_TABLE"
+            val db: SQLiteDatabase = this.writableDatabase
+            val cursor: Cursor = db.rawQuery(selectQuery, null)
+            if(cursor.moveToFirst()){
+                do{
+                    val pgm = PgmItem()
+                    pgm.pgm_id = cursor.getInt(cursor.getColumnIndex(PROGRAM_ID.toString())).toByte()
+                    pgm.command = cursor.getInt(cursor.getColumnIndex(PROGRAM_COMMAND.toString())).toByte()
+                    pgm.name = cursor.getString(cursor.getColumnIndex(PROGRAM_NAME.toString()))
+
+                    lstpgm.add(pgm)
+                }while(cursor.moveToNext())
+
+            }
+            db.close()
+            return lstpgm
+        }
+
+    fun addPgm(pgm: PgmItem){
+        val db:SQLiteDatabase = this.writableDatabase
+        val values = ContentValues()
+        values.put(PROGRAM_COMMAND,pgm.command)
+        values.put(PROGRAM_NAME, pgm.name)
+        db.insert(PROGRAM_TABLE, null , values)
+        db.close()
+
+    }
+
+    fun updatePgm(pgm:PgmItem): Int{
+        val db:SQLiteDatabase = this.writableDatabase
+        val values = ContentValues()
+        values.put(PROGRAM_ID, pgm.pgm_id)
+        values.put(PROGRAM_COMMAND,pgm.command)
+        values.put(PROGRAM_NAME, pgm.name)
+
+        return db.update(PROGRAM_TABLE, values , "$PROGRAM_ID = ?" , arrayOf(pgm.pgm_id.toString()))
+        db.close()
+    }
+
+    fun deletePgm(pgm: PgmItem){
+        val db:SQLiteDatabase = this.writableDatabase
+
+        db.delete(PROGRAM_TABLE, "$PROGRAM_ID = ?", arrayOf(pgm.pgm_id.toString()))
+        db.close()
+    }
+
+    fun deleteAllPgm(){
+        val db:SQLiteDatabase = this.writableDatabase
+
+        db.execSQL("DELETE from $PROGRAM_TABLE")
     }
 }

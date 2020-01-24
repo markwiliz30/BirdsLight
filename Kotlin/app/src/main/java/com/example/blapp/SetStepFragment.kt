@@ -272,8 +272,6 @@ class SetStepFragment : Fragment() {
             txt_step_time.setText(tmVal.toString())
     }
 
-
-
     private fun ResetCurrentStep()
     {
         pVal = 0

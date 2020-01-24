@@ -29,5 +29,4 @@ class PgmAdapter(internal var context: FragmentActivity?, internal var itemList:
         var pgmHold: Int? = itemList[position].pgm!!.toInt()
         holder.txt_pgm_num.text = pgmHold.toString()
     }
-
 }

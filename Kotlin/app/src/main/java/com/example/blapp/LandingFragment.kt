@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.content.pm.PackageManager
 import android.net.wifi.ScanResult
 import android.net.wifi.WifiManager
 import android.os.Bundle
@@ -13,6 +14,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -33,57 +36,78 @@ class LandingFragment : Fragment() {
 
     lateinit var layoutManager: LinearLayoutManager
 
-    lateinit var adapter: WifiAdapter
-
     var wifiList = ArrayList<WifiItem>()
 
+    var resultList = ArrayList<ScanResult>()
     lateinit var wifiManager: WifiManager
-    private var results = ArrayList<ScanResult>()
+    lateinit var adapter: WifiAdapter
 
-    val wifiReceiver = object : BroadcastReceiver(){
-        override fun onReceive(p0: Context?, p1: Intent?) {
-            results = wifiManager.scanResults as ArrayList<ScanResult>
-//            activity!!.unregisterReceiver(this)
-//
-//            for (item in results!!)
-//            {
-//                val newWifiItem = WifiItem()
-//                newWifiItem.name = item.SSID
-//                newWifiItem.status = 0
-//                newWifiItem.level = 4
-//                wifiList.add(newWifiItem)
-//                adapter.notifyDataSetChanged()
-//            }
+    val broadcastReceiver = object : BroadcastReceiver() {
+        override fun onReceive(contxt: Context?, intent: Intent?) {
+            resultList = wifiManager.scanResults as ArrayList<ScanResult>
+//            val handler = Handler()
+//            handler.postDelayed({
+//                stopScanning()
+//            }, 5000)
+            displayScannedWifi()
+            Toast.makeText(activity, resultList.count().toString() , Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun displayScannedWifi() {
+        wifiList.clear()
+        var sameSSIDCount = 1
+        for(item in resultList)
+        {
+            var newWifiItem = WifiItem()
+            val found = wifiList.filter { it.name == item.SSID }
+            if(found.count() != 0)
+            {
+                sameSSIDCount++
+                newWifiItem.name = item.SSID + " " + sameSSIDCount
+            }
+            else
+            {
+                newWifiItem.name = item.SSID
+            }
+            newWifiItem.level = WifiManager.calculateSignalLevel(item.level, 5)
+            newWifiItem.status = 2
+
+            wifiList.add(newWifiItem)
+        }
+
+        wifiList.sortByDescending { it.level }
+        adapter.notifyDataSetChanged()
+    }
+
+    fun startScanning() {
+        activity!!.registerReceiver(broadcastReceiver, IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION))
+        wifiManager.startScan()
+    }
+
+    fun stopScanning() {
+        activity!!.unregisterReceiver(broadcastReceiver)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        wifiManager = activity!!.applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
         Protocol.cDeviceProt = deviceProtocol
-        wifiManager = this.activity!!.getApplicationContext().getSystemService(Context.WIFI_SERVICE) as WifiManager
 
         if(!wifiManager!!.isWifiEnabled)
         {
-            Toast.makeText(activity, "Wifi is disabled", Toast.LENGTH_SHORT).show()
             wifiManager!!.isWifiEnabled = true
+            Toast.makeText(activity, "Wifi Enabled", Toast.LENGTH_SHORT).show()
         }
-        activity!!.registerReceiver(wifiReceiver, IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION))
 
-        adapter = WifiAdapter(activity, wifiList)
         return inflater.inflate(R.layout.fragment_landing, container, false)
-    }
-
-    private fun scanWifi()
-    {
-        activity!!.registerReceiver(wifiReceiver, IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION))
-        wifiManager.startScan()
-        Toast.makeText(activity, "Scanning Wifi...", Toast.LENGTH_SHORT).show()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         lst_wifi.setHasFixedSize(true)
         layoutManager = LinearLayoutManager(activity)
         lst_wifi.layoutManager = layoutManager
@@ -93,6 +117,7 @@ class LandingFragment : Fragment() {
 
         adapter = WifiAdapter(activity, wifiList)
         lst_wifi.adapter = adapter
+
 
         testbt.setOnClickListener{
 
@@ -104,10 +129,13 @@ class LandingFragment : Fragment() {
                 dialog.dismiss()
             }
             postDelayedSendToModule.postDelayed(sendToModule, 3000)
+
+            adapter = WifiAdapter(activity, wifiList)
+            lst_wifi.adapter = adapter
         }
 
         testbt2.setOnClickListener{
-            scanWifi()
+            startScanning()
         }
     }
 
@@ -124,13 +152,5 @@ class LandingFragment : Fragment() {
         item2.status = 2
         item2.level = 4
         wifiList.add(item2)
-
-        adapter = WifiAdapter(activity, wifiList)
-        lst_wifi.adapter = adapter
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Protocol.cDeviceProt.stopChannel()
     }
 }

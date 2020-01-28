@@ -1,5 +1,8 @@
 package com.example.blapp
 
+import android.Manifest
+import android.content.Intent
+import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.NavController
@@ -8,9 +11,14 @@ import kotlinx.android.synthetic.main.activity_landing.*
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation
 import com.CurrentId.extensions.CurrentID
 import android.os.Handler
+import android.provider.Settings
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import com.example.blapp.common.Protocol
+import kotlin.system.exitProcess
 
 
 class Landing : AppCompatActivity() {
@@ -30,12 +38,13 @@ class Landing : AppCompatActivity() {
         private var aax = true
     }
 
-
+    private val REQUEST_LOCATION_CODE = 1
     lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_landing)
+        setPermission()
 
         navController = Navigation.findNavController(this, R.id.nav_host_fragment)
 
@@ -211,7 +220,6 @@ class Landing : AppCompatActivity() {
 
     }
 
-
     private var doubleBackToExitPressedOnce = false
 
     override fun onBackPressed() {
@@ -250,6 +258,102 @@ class Landing : AppCompatActivity() {
                 Toast.makeText(this, "Press BACK again to exit", Toast.LENGTH_SHORT).show()
 
                 Handler().postDelayed({ doubleBackToExitPressedOnce = false }, 2000)
+            }
+        }
+    }
+
+    private fun setPermission(){
+//        val permission = ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
+//        if(permission!= PackageManager.PERMISSION_GRANTED)
+//        {
+//            Toast.makeText(this, "Granted", Toast.LENGTH_SHORT).show()
+//        }
+
+        if(ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.ACCESS_FINE_LOCATION))
+        {
+            makeRequest()
+        }
+        else
+        {
+            makeRequest()
+        }
+    }
+
+    private fun makeRequest(){
+        ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+            REQUEST_LOCATION_CODE)
+    }
+//
+//    override fun onRequestPermissionsResult(
+//        requestCode: Int,
+//        permissions: Array<out String>,
+//        grantResults: IntArray
+//    ) {
+//        //super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+//        when(requestCode)
+//        {
+//            REQUEST_LOCATION_CODE -> {
+//                if(grantResults.isEmpty()||grantResults[0]!= PackageManager.PERMISSION_GRANTED)
+//                {
+//                    Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show()
+//                    exitProcess(-1)
+//                }
+//                else
+//                {
+//                    Toast.makeText(this, "Permission granted", Toast.LENGTH_SHORT).show()
+//                }
+//            }
+//        }
+//    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Protocol.cDeviceProt.stopChannel()
+        Toast.makeText(this, "app exit", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
+        if (requestCode == REQUEST_LOCATION_CODE) {
+            // for each permission check if the user granted/denied them
+            // you may want to group the rationale in a single dialog,
+            // this is just an example
+            var i = 0
+            val len = permissions.size
+            while (i < len) {
+                val permission = permissions[i]
+                if (grantResults[i] == PackageManager.PERMISSION_DENIED) {
+                    // user rejected the permission
+                    val showRationale = shouldShowRequestPermissionRationale(permission)
+                        if (!showRationale) {
+                            // user also CHECKED "never ask again"
+                            // you can either enable some fall back,
+                            // disable features of your app
+                            // or open another dialog explaining
+                            // again the permission and directing to
+                            // the app setting
+                            val mAlertDialog = AlertDialog.Builder(this)
+                            mAlertDialog.setIcon(R.mipmap.ic_launcher_round) //set alertdialog icon
+                            mAlertDialog.setTitle("Location Settings Required!!") //set alertdialog title
+                            mAlertDialog.setMessage("This Application need to enable the location settings GOTO BLApp>Permission and eneble the location setting") //set alertdialog message
+                            mAlertDialog.setPositiveButton("Open Settings") { dialog, which ->
+                                startActivityForResult(Intent(Settings.ACTION_MANAGE_APPLICATIONS_SETTINGS), 0)
+                            }
+                            mAlertDialog.show()
+                    } else if (Manifest.permission.ACCESS_FINE_LOCATION == permission) {
+                        //showRationale(permission, R.string.permission_denied_contacts)
+                        // user did NOT check "never ask again"
+                        // this is a good place to explain the user
+                        // why you need the permission and ask if he wants
+                        // to accept it (the rationale)
+                        exitProcess(-1)
+                    } else{
+                    }/* possibly check more permissions...*/
+                }
+                i++
             }
         }
     }

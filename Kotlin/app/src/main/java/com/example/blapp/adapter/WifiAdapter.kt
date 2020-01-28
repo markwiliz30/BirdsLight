@@ -1,7 +1,9 @@
 package com.example.blapp.adapter
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.blapp.R
@@ -33,13 +35,58 @@ RecyclerView.Adapter<WifiViewHolder>()
         }
 
         var wifiLvlHold: Int? = itemList[position].level
-        when(wifiLvlHold){
-            0 -> holder.lblWifiLvl.setImageResource(R.drawable.ic_signal_wifi_0_bar_dark_blue_24dp)
-            1 -> holder.lblWifiLvl.setImageResource(R.drawable.ic_signal_wifi_1_bar_dark_blue_24dp)
-            2 -> holder.lblWifiLvl.setImageResource(R.drawable.ic_signal_wifi_2_bar_dark_blue_24dp)
-            3 -> holder.lblWifiLvl.setImageResource(R.drawable.ic_signal_wifi_3_bar_dark_blue_24dp)
-            4 -> holder.lblWifiLvl.setImageResource(R.drawable.ic_signal_wifi_4_bar_dark_blue_24dp)
-            else -> holder.lblWifiLvl.setImageResource(R.drawable.ic_signal_wifi_0_bar_dark_blue_24dp)
+        if(itemList[position].selected)
+        {
+            when(wifiLvlHold){
+                0 -> holder.lblWifiLvl.setImageResource(R.drawable.ic_signal_wifi_0_bar_light_blue_24dp)
+                1 -> holder.lblWifiLvl.setImageResource(R.drawable.ic_signal_wifi_1_bar_light_blue_24dp)
+                2 -> holder.lblWifiLvl.setImageResource(R.drawable.ic_signal_wifi_2_bar_light_blue_24dp)
+                3 -> holder.lblWifiLvl.setImageResource(R.drawable.ic_signal_wifi_3_bar_light_blue_24dp)
+                4 -> holder.lblWifiLvl.setImageResource(R.drawable.ic_signal_wifi_4_bar_light_blue_24dp)
+                else -> holder.lblWifiLvl.setImageResource(R.drawable.ic_signal_wifi_0_bar_light_blue_24dp)
+            }
+        }
+        else
+        {
+            when(wifiLvlHold){
+                0 -> holder.lblWifiLvl.setImageResource(R.drawable.ic_signal_wifi_0_bar_dark_blue_24dp)
+                1 -> holder.lblWifiLvl.setImageResource(R.drawable.ic_signal_wifi_1_bar_dark_blue_24dp)
+                2 -> holder.lblWifiLvl.setImageResource(R.drawable.ic_signal_wifi_2_bar_dark_blue_24dp)
+                3 -> holder.lblWifiLvl.setImageResource(R.drawable.ic_signal_wifi_3_bar_dark_blue_24dp)
+                4 -> holder.lblWifiLvl.setImageResource(R.drawable.ic_signal_wifi_4_bar_dark_blue_24dp)
+                else -> holder.lblWifiLvl.setImageResource(R.drawable.ic_signal_wifi_0_bar_dark_blue_24dp)
+            }
+        }
+
+
+        holder.itemView.setOnClickListener{
+            for(item in itemList)
+            {
+                item.selected = false
+            }
+            itemList[position].selected = !itemList[position].selected
+            notifyDataSetChanged()
+//            if(itemList[position].selected)
+//            {
+//
+//            }
+//            else
+//            {
+//                holder.itemView.setBackgroundColor(Color.parseColor("#ffffff"))
+//            }
+        }
+
+        if(itemList[position].selected)
+        {
+            holder.itemView.setBackgroundColor(Color.parseColor("#39405A"))
+            holder.lblWifiName.setTextColor(Color.parseColor("#14BED1"))
+            holder.lblWifiStatus.setTextColor(Color.parseColor("#14BED1"))
+        }
+        else
+        {
+            holder.itemView.setBackgroundColor(Color.parseColor("#14BED1"))
+            holder.lblWifiName.setTextColor(Color.parseColor("#39405A"))
+            holder.lblWifiStatus.setTextColor(Color.parseColor("#39405A"))
         }
     }
 }

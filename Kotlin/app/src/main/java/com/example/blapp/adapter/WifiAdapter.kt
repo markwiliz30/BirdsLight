@@ -1,12 +1,17 @@
 package com.example.blapp.adapter
 
+import android.content.Context
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.blapp.R
+import com.example.blapp.common.InputDialog
+import com.example.blapp.common.SelectedDevice
+import com.example.blapp.common.SharedWifiDetails
 import com.example.blapp.model.WifiItem
 
 class WifiAdapter(internal var context: FragmentActivity?, internal var itemList:MutableList<WifiItem>):
@@ -58,14 +63,20 @@ RecyclerView.Adapter<WifiViewHolder>()
             }
         }
 
-
         holder.itemView.setOnClickListener{
             for(item in itemList)
             {
                 item.selected = false
             }
-            itemList[position].selected = !itemList[position].selected
-            notifyDataSetChanged()
+            //itemList[position].selected = !itemList[position].selected
+            SharedWifiDetails.selectedWifiIndex = position
+            //notifyDataSetChanged()
+
+            SelectedDevice.SSID = itemList[position].name.toString()
+
+            val inputDialog = InputDialog()
+            inputDialog.show((context as FragmentActivity).supportFragmentManager, "wifiInput")
+
 //            if(itemList[position].selected)
 //            {
 //

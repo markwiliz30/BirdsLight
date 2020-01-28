@@ -112,7 +112,6 @@ class ProgramFragment : Fragment(){
                                // showCreateCategoryDialog(pos+1)
                                //var test = dbPgm.allpgm
                                 //var test2 = dbStep.allStep
-
                             }
                         }
                     )

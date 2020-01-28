@@ -3,10 +3,12 @@ package com.example.blapp.adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.blapp.R
 import com.example.blapp.model.PgmItem
+import kotlinx.android.synthetic.main.fragment_import_list.view.*
 
 class ImportAdapter(internal var context: FragmentActivity?,internal var itemList:List<PgmItem>):
     RecyclerView.Adapter<ImportViewHolder>(){
@@ -23,7 +25,9 @@ class ImportAdapter(internal var context: FragmentActivity?,internal var itemLis
     override fun onBindViewHolder(holder: ImportViewHolder, position: Int) {
         var importhold: String? = itemList[position].name
         holder.imporTitle.text = importhold.toString()
+        holder.importCard.setOnClickListener{
+            itemList[position].isClicked = !itemList[position].isClicked
+                holder.importCardCheckBox.isChecked = itemList[position].isClicked
+        }
     }
-
-
 }

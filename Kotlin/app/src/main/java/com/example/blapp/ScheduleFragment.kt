@@ -31,6 +31,11 @@ class ScheduleFragment : Fragment() {
             CurrentID.UpdateID(num = 7)
             CurrentID.Updatebool(x = true)
         }
+        btnDateRange.setOnClickListener{
+            navController.navigate(R.id.action_scheduleFragment_to_calendarFragment)
+            CurrentID.UpdateID(num = 10)
+            CurrentID.Updatebool(x = true)
+        }
     }
 
 }

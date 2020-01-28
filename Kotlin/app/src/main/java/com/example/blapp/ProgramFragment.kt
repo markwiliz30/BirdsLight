@@ -18,7 +18,6 @@ import com.CurrentId.extensions.CurrentID
 import com.example.blapp.adapter.PgmAdapter
 import com.example.blapp.collection.PgmCollection
 import com.example.blapp.collection.StepCollection
-import com.example.blapp.databasehelper.pgmmanager
 import com.example.blapp.databasehelper.DBmanager
 import com.example.blapp.helper.MyButton
 import com.example.blapp.helper.MySwipeHelper
@@ -37,7 +36,7 @@ class ProgramFragment : Fragment(){
     lateinit var adapter: PgmAdapter
 
    // internal lateinit var dbStep:DBmanager
-    internal lateinit var dbPgm:DBmanager
+    internal lateinit var dbm:DBmanager
     internal var lstStep: List<StepItem> = ArrayList<StepItem>()
     internal var lstPgm: List<PgmItem> = ArrayList<PgmItem>()
 
@@ -54,7 +53,7 @@ class ProgramFragment : Fragment(){
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
        // dbStep = DBmanager(activity!!)
-        dbPgm = DBmanager(activity!!)
+        dbm = DBmanager(activity!!)
 
         recycler_pgm.setHasFixedSize(true)
         recycler_pgm.setItemViewCacheSize(25)
@@ -107,11 +106,7 @@ class ProgramFragment : Fragment(){
                         Color.parseColor("#14BED1"),
                         object : MyButtonClickListener{
                             override fun onClick(pos: Int) {
-                                //dbStep.eyy()
-                                dbPgm.eyy()
-                               // showCreateCategoryDialog(pos+1)
-                               //var test = dbPgm.allpgm
-                                //var test2 = dbStep.allStep
+                                showCreateCategoryDialog(pos+1)
                             }
                         }
                     )
@@ -228,7 +223,7 @@ class ProgramFragment : Fragment(){
             val textName = editAlert.name_input.text
 
             var pgmAdd = PgmCollection.pgmCollection.find { it.pgm == pgm.toByte() }
-            var pgmNameCheck = dbPgm.allpgm.find { it.name == textName.toString() }
+            var pgmNameCheck = dbm.allpgm.find { it.name == textName.toString() }
 
 
 
@@ -244,13 +239,17 @@ class ProgramFragment : Fragment(){
                     }
                     else -> {
                         pgmAdd.name = textName.toString()
-                        do{
-                            var stepAdd = StepCollection.stepCollection.find { it.pgm == pgm.toByte() }
-                            stepAdd!!.pgm_name = textName.toString()
-                            dbPgm.addStep(stepAdd)
-                        }while(stepAdd != null)
+                            var stepAdd = StepCollection.stepCollection.filter { it.pgm == pgm.toByte() }
+                        for(steps in stepAdd){
+                            steps.pgm_name = textName.toString()
+                            dbm.addStep(steps)
+                        }
 
-                        dbPgm.addPgm(pgmAdd)
+
+
+                        dbm.addPgm(pgmAdd)
+                        var test = dbm.allpgm
+                        var test2 = dbm.allStep
                         editAlert.dismiss()
                         Toast.makeText(activity!!, "Save Success!" , Toast.LENGTH_LONG).show()
                     }

@@ -122,6 +122,9 @@
             app:destination="@id/sequence"
             app:exitAnim="@anim/slide_up"
             app:enterAnim="@anim/slide_down"/>
+        <action
+            android:id="@+id/action_scheduleFragment_to_calendarFragment"
+            app:destination="@id/calendarFragment" />
     </fragment>
     <fragment
         android:id="@+id/settings"
@@ -304,5 +307,26 @@
             app:destination="@id/scheduleFragment"
             app:exitAnim="@anim/slide_up"
             app:enterAnim="@anim/slide_down"/>
+    </fragment>
+    <fragment
+        android:id="@+id/calendarFragment"
+        android:name="com.example.blapp.CalendarFragment"
+        android:label="fragment_calendar"
+        tools:layout="@layout/fragment_calendar" >
+        <action
+            android:id="@+id/action_calendarFragment_to_scheduleFragment"
+            app:destination="@id/scheduleFragment" />
+        <action
+            android:id="@+id/action_calendarFragment_to_landingFragment"
+            app:destination="@id/landingFragment" />
+        <action
+            android:id="@+id/action_calendarFragment_to_testFragment"
+            app:destination="@id/testFragment" />
+        <action
+            android:id="@+id/action_calendarFragment_to_settings"
+            app:destination="@id/settings" />
+        <action
+            android:id="@+id/action_calendarFragment_to_programFragment"
+            app:destination="@id/programFragment" />
     </fragment>
 </navigation>
